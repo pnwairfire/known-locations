@@ -6,7 +6,7 @@ collectionName <- "airnow_PM2.5_sites"
 
 # ----- Load and Review --------------------------------------------------------
 
-setLocationDataDir(".")
+setLocationDataDir("./AirNow")
 
 locationTbl <- table_load(collectionName)
 
@@ -72,6 +72,13 @@ MazamaLocationUtils::table_save(
   collectionName = collectionName,
   backup = FALSE,
   outputType = "csv"
+)
+
+MazamaLocationUtils::table_save(
+  locationTbl,
+  collectionName = collectionName,
+  backup = FALSE,
+  outputType = "rda"
 )
 
 
