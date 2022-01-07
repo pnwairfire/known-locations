@@ -41,7 +41,7 @@ dplyr::glimpse(locationTbl)
 # Current Map
 
 The interactive map below provides a quick preview of the status of the current
-dataset.
+version (0.0.2) of the dataset.
 
 ```{r leaflet-map}
 MazamaLocationUtils::table_leaflet(
@@ -50,7 +50,7 @@ MazamaLocationUtils::table_leaflet(
   extraVars = c(
     "AQSID", 
     "airnow_agencyName", 
-    "airnow_status"
+    "elevation"
   ),
   radius = 6,
   color = "black",
