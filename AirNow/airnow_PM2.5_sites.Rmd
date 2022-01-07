@@ -47,12 +47,15 @@ dataset.
 MazamaLocationUtils::table_leaflet(
   locationTbl,
   maptype = "terrain",
-  extraVars = c("AQSID", "airnow_parameterName", "airnow_status"),
+  extraVars = c(
+    "AQSID", 
+    "airnow_agencyName", 
+    "airnow_status"
+  ),
   radius = 6,
   color = "black",
   weight = 2,
   fillColor = "blue",
   fillOpacity = 0.2  
 )
-
 ```

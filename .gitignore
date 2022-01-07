@@ -1,5 +1,18 @@
+# History files
+.Rhistory
+.Rapp.history
 
-# OSX stuff
+# Session Data files
+.RData
+
+# RStudio files
+*.Rproj
+.Rproj.user/
+
+################################################################################
+# Additional Mazama Science items
+
+# OS X stuff
 .DS_Store
 .AppleDouble
 .LSOverride

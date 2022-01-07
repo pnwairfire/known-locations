@@ -1,8 +1,10 @@
+[![DOI](https://zenodo.org/badge/445637007.svg)](https://zenodo.org/badge/latestdoi/445637007)
+
 # Known Locations
 
 This repository contains _"known locations"_ files providing spatial metadata 
-for monitoring sites used in air quality and other stationary, environmental 
-monitoring activities.
+for monitoring sites used in air quality and other stationary, 
+environmental-monitoring activities.
 
 These files are largely generated and maintained using the 
 [MazamaLocationUtils](https://github.com/MazamaScience/MazamaLocationUtils)
