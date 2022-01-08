@@ -10,6 +10,15 @@ setLocationDataDir("./AirNow")
 
 locationTbl <- table_load(collectionName)
 
+# Fix locationTbl:
+# 1) airnow_FIPSMSACode once got converted to <dbl> after a manual update
+
+locationTbl <-
+  locationTbl %>%
+  dplyr::mutate(
+    airnow_FIPSMSACode = as.character(.data$airnow_FIPSMSACode)
+  )
+
 MazamaLocationUtils::table_leaflet(
   locationTbl,
   maptype = "terrain",
