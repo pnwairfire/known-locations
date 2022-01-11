@@ -1,0 +1,37 @@
+locationID,locationName,longitude,latitude,elevation,countryCode,stateCode,countyName,timezone,houseNumber,street,city,zip,AQSID,airnow_parameterName,airnow_siteCode,airnow_status,airnow_agencyID,airnow_agencyName,airnow_EPARegion,airnow_GMTOffsetHours,airnow_FIPSMSACode,airnow_MSAName
+801261b7f8544814,MMNPS1019,-119.658043,37.539886,1216.33,US,CA,NA,America/Los_Angeles,NA,NA,NA,NA,MMNPS1019,PM2.5,NA,Active,NA,National Park Service,NA,NA,NA,NA
+cf6ac6fb30ac7f12,us.ca_cf6ac6,-122.383,41.42718,1055.18,US,CA,NA,America/Los_Angeles,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+21136ef760d31d39,us.ca_21136e,-122.051775,41.784461,1299.67,US,CA,NA,America/Los_Angeles,NA,NA,NA,NA,840MMNPS1044,PM2.5,NA,Active,NA,National Park Service,NA,NA,NA,NA
+4bfaf4caf102e607,us.ca_4bfaf4,-122.371795,41.528449,883.62,US,CA,NA,America/Los_Angeles,NA,NA,NA,NA,840MMNPS1045,PM2.5,NA,Active,NA,National Park Service,NA,NA,NA,NA
+e95050b9fd976b4d,MMCA81022,-122.899976,41.457896,902.65,US,CA,NA,America/Los_Angeles,NA,NA,NA,NA,MMCA81022,PM2.5,NA,Active,NA,California Air Resources Board,NA,NA,NA,NA
+10f2477633cb06be,MMCA81045,-121.48643,41.956251,1230.34,US,CA,NA,America/Los_Angeles,NA,NA,NA,NA,MMCA81045,PM2.5,NA,Active,NA,California Air Resources Board,NA,NA,NA,NA
+84abf84a75cde3f5,MMCA81049,-123.400004,41.790018,438.83,US,CA,NA,America/Los_Angeles,NA,NA,NA,NA,840MMCA81049,PM2.5,NA,Active,NA,California Air Resources Board,NA,NA,NA,NA
+a99d99b24d7b9b93,us.ca_a99d99,-120.3549,38.25816,1242.87,US,CA,NA,America/Los_Angeles,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+da66714f9e11ff4a,MMCA82012,-123.26952,39.793339,435.55,US,CA,NA,America/Los_Angeles,NA,NA,NA,NA,840MMCA82012,PM2.5,NA,Active,NA,California Air Resources Board,NA,NA,NA,NA
+8ca91d2521b701d4,Downtown Sacramento - T Street,-121.49311,38.56844,5.06,US,CA,Sacramento,America/Los_Angeles,NA,NA,NA,NA,060670010,PM2.5,0010,Active,CA8,California Air Resources Board,R9,-8,40900," Sacramento--Arden-Arcade--Roseville, CA "
+728fdadf5ddb59a3,MMCA82034,-119.691517,34.944355,653.74,US,CA,NA,America/Los_Angeles,NA,NA,NA,NA,840MMCA82034,PM2.5,NA,Active,NA,California Air Resources Board,NA,NA,NA,NA
+8821b1268c41ffe6,MMCA82039,-119.506402,34.39019,16.12,US,CA,NA,America/Los_Angeles,NA,NA,NA,NA,840MMCA82039,PM2.5,NA,Active,NA,California Air Resources Board,NA,NA,NA,NA
+1c8513f2745e4adb,MMCA82043,-122.524874,40.516001,226.17,US,CA,NA,America/Los_Angeles,NA,NA,NA,NA,840MMCA82043,PM2.5,NA,Active,NA,California Air Resources Board,NA,NA,NA,NA
+38e9720ea918a0a6,us.ca_38e972,-119.104221,36.414539,134.25,US,CA,NA,America/Los_Angeles,NA,NA,NA,NA,840MMCA82046,PM2.5,NA,Active,NA,California Air Resources Board,NA,NA,NA,NA
+30265ea4a7f35a40,MMCA82053,-120.109985,34.664515,254.82,US,CA,NA,America/Los_Angeles,NA,NA,NA,NA,840MMCA82053,PM2.5,NA,Active,NA,California Air Resources Board,NA,NA,NA,NA
+b568c1750fde5175,MMCA82059,-121.941504,40.803845,657.92,US,CA,NA,America/Los_Angeles,NA,NA,NA,NA,840MMCA82059,PM2.5,NA,Active,NA,California Air Resources Board,NA,NA,NA,NA
+a5e38ee5a7077e5c,Kernville,-118.4175,35.755,822.28,US,CA,Kern,America/Los_Angeles,NA,NA,NA,NA,840060299999,PM2.5,0299,Active,FS1,Forest Service,USEPA,-8,NA,NA
+28b11109b7794612,us.ca_28b111,-123.9962,41.51379,11.49,US,CA,NA,America/Los_Angeles,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+531b93756e48e29c,Reubens-ID,-116.535797,46.3349,1077.6,US,ID,Nez Perce,America/Los_Angeles,NA,NA,NA,NA,160690014,PM2.5,0014,Inactive,TRX,Quality Review and Exchange System for Tribes (QREST),R8,-8,NA,NA
+e94fde2aa6c3c22d,us.id_e94fde,-116.2553,46.23429,1008.26,US,ID,NA,America/Los_Angeles,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+42716cf87f82aaac,us.ca_42716c,-122.127,41.24984,993.02,US,CA,NA,America/Los_Angeles,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+b5438c4b813a58db,us.ca_b5438c,-123.1297,41.30095,764.87,US,CA,NA,America/Los_Angeles,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+f2daaa4faad1c23b,us.ca_f2daaa,-118.8043,36.02857,395,US,CA,NA,America/Los_Angeles,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+6602167eb8b806d5,us.ca_660216,-118.7988,36.02873,337.46,US,CA,NA,America/Los_Angeles,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+71068ebd0421d530,us.ca_71068e,-119.9934,37.44286,482.03,US,CA,NA,America/Los_Angeles,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+671da4483ce27988,us.ca_671da4,-122.3927,40.8906,383.24,US,CA,NA,America/Los_Angeles,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+23dd10e6c4a79c45,us.ca_23dd10,-119.7435,37.46455,930.3,US,CA,NA,America/Los_Angeles,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+a88779dd53651c6c,us.ca_a88779,-121.9517,41.26168,1118.69,US,CA,NA,America/Los_Angeles,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+ce204619e8599572,us.ca_ce2046,-121.6539,40.88263,952.92,US,CA,NA,America/Los_Angeles,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+a95d02b1db1a56f6,us.ca_a95d02,-122.2835,41.18316,657.79,US,CA,NA,America/Los_Angeles,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+ae652da78bbc3d02,us.ca_ae652d,-119.9819,37.49795,642.38,US,CA,NA,America/Los_Angeles,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+b32e5e8085ee9c8f,us.ca_b32e5e,-119.171,36.71594,825.2,US,CA,NA,America/Los_Angeles,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+48f152d63a62a242,us.ca_48f152,-123.675263,41.04725,108.12,US,CA,NA,America/Los_Angeles,NA,NA,NA,NA,840MMCA82069,PM2.5,NA,Active,NA,California Air Resources Board,NA,NA,NA,NA
+56ec6881f497e8f4,Lapwai-ID,-116.806198,46.397202,339.2,US,ID,Nez Perce,America/Los_Angeles,NA,NA,NA,NA,160690013,PM2.5,0013,Inactive,TRX,Quality Review and Exchange System for Tribes (QREST),R8,-8,30300," Lewiston, ID-WA "
+7a6372e945c0dc03,us.ca_7a6372,-121.5094,38.56124,4.43,US,CA,NA,America/Los_Angeles,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+6beae66cbb7109e3,us.ca_6beae6,-117.1192,32.81009,106.07,US,CA,NA,America/Los_Angeles,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA

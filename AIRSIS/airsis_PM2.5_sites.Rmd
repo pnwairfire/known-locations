@@ -1,0 +1,59 @@
+---
+title: "airsis_PM2.5_sites"
+author: "Jonathan Callahan"
+date: "1/10/2022"
+output: html_document
+---
+
+```{r setup, include = FALSE, fig.width = 8}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Background
+
+The US Forest Service [AirFire](https://portal.airfire.org) Group processes
+real-time air quality data from [AIRSIS](http://<provider>.airsis.com/). This 
+data is used in research projects and on-line tools such as the 
+[Fire & Smoke Map](https://fire.airnow.gov).
+
+The `airsis_PM2.5_sites.csv` "known locations" file is queried and updated
+during data processing and contains the most complete version of the spatial 
+metadata associated with AIRSIS monitoring sites.
+
+# Spatial Metadata
+
+Spatial metadata in this dataset include core location metadata defined in 
+**MazamaLocationUtils::coreMetadataNames**, the `AQSID` site identifier used by the
+EPA as well as fields prefixed with `airnow_` which are copied from the AirNow
+known locations table when AIRSIS monitors are found in the AirNow data stream:
+
+```{r data-columns, results = "hold"}
+library(MazamaLocationUtils)
+setLocationDataDir(".")
+
+locationTbl <- table_load("airsis_PM2.5_sites_1000")
+
+dplyr::glimpse(locationTbl)
+```
+
+# Current Map
+
+The interactive map below provides a quick preview of the status of the current
+version (0.0.2) of the dataset.
+
+```{r leaflet-map}
+MazamaLocationUtils::table_leaflet(
+  locationTbl,
+  maptype = "terrain",
+  extraVars = c(
+    "AQSID", 
+    "airnow_agencyName", 
+    "elevation"
+  ),
+  radius = 6,
+  color = "black",
+  weight = 2,
+  fillColor = "blue",
+  fillOpacity = 0.2  
+)
+```
