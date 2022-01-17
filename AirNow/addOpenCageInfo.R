@@ -2,8 +2,8 @@
 
 library(MazamaLocationUtils)
 
-collectionDir <- "AIRSIS"
-collectionName <- "airsis_PM2.5_sites_1000"
+collectionDir <- "AirNow"
+collectionName <- "airnow_PM2.5_sites"
 collectionFile <- paste0(collectionName, ".rda")
 
 # ----- Load and Review --------------------------------------------------------
@@ -17,7 +17,7 @@ setLocationDataDir(file.path(".", collectionDir))
 
 locationTbl <- table_load(collectionName)
 
-locationTbl %>% table_leaflet()
+locationTbl %>% table_leaflet(extraVars = c("elevation"))
 
 
 # ----- Add OpenCage info ------------------------------------------------------
@@ -46,9 +46,9 @@ for ( i in seq_len(nrow(locationTbl)) ) {
 }
 
 
-newLocationTbl <- dplyr::bind_rows(openCageList)
+openCageTbl <- dplyr::bind_rows(openCageList)
 
-
+# TODO:  Paste sourceLines from MazamaLocationUtils::table_addOpenCageInfo()
 
 # ----- Review -----------------------------------------------------------------
 
