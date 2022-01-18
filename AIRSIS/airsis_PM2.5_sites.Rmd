@@ -1,7 +1,7 @@
 ---
 title: "airsis_PM2.5_sites"
 author: "Jonathan Callahan"
-date: "1/10/2022"
+date: "1/18/2022"
 output: html_document
 ---
 
@@ -25,7 +25,13 @@ metadata associated with AIRSIS monitoring sites.
 Spatial metadata in this dataset include core location metadata defined in 
 **MazamaLocationUtils::coreMetadataNames**, the `AQSID` site identifier used by the
 EPA as well as fields prefixed with `airnow_` which are copied from the AirNow
-known locations table when AIRSIS monitors are found in the AirNow data stream:
+known locations table when AIRSIS monitors are found in the AirNow data stream.
+
+Additional fields are generated through reverse geocoding web requests to
+the following web services:
+
+* [USGS Elevation Point Query Service](https://nationalmap.gov/epqs/)
+* [OpenCage Geocoding API](https://opencagedata.com)
 
 ```{r data-columns, results = "hold"}
 library(MazamaLocationUtils)
@@ -39,7 +45,7 @@ dplyr::glimpse(locationTbl)
 # Current Map
 
 The interactive map below provides a quick preview of the status of the current
-version (0.0.2) of the dataset.
+version of the dataset.
 
 ```{r leaflet-map}
 MazamaLocationUtils::table_leaflet(
