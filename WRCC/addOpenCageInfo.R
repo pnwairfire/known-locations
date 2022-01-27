@@ -22,31 +22,31 @@ locationTbl %>% table_leaflet()
 
 # ----- GET OpenCage info ------------------------------------------------------
 
-# TODO:  waiting on a fix in tidygeocoder
+# NOTE:  Need jsonlite 1.7.3 for this version to work.
 
-# locationTbl <- table_addOpenCageInfo(
-#   locationTbl,
-#   replaceExisting = TRUE,
-#   verbose = FALSE
-# )
+locationTbl <- table_addOpenCageInfo(
+  locationTbl,
+  replaceExisting = TRUE,
+  verbose = FALSE
+)
 
-openCageList <- list()
-
-for ( i in seq_len(nrow(locationTbl)) ) {
-
-  if ( (i %% 20) == 0 ) message("Working on ", i, " ...")
-
-  openCageList[[i]] <-
-    MazamaLocationUtils::location_getOpenCageInfo(
-      longitude = locationTbl$longitude[i],
-      latitude = locationTbl$latitude[i],
-      verbose = FALSE
-    )
-
-}
-
-
-openCageTbl <- dplyr::bind_rows(openCageList)
+# openCageList <- list()
+#
+# for ( i in seq_len(nrow(locationTbl)) ) {
+#
+#   if ( (i %% 20) == 0 ) message("Working on ", i, " ...")
+#
+#   openCageList[[i]] <-
+#     MazamaLocationUtils::location_getOpenCageInfo(
+#       longitude = locationTbl$longitude[i],
+#       latitude = locationTbl$latitude[i],
+#       verbose = FALSE
+#     )
+#
+# }
+#
+#
+# openCageTbl <- dplyr::bind_rows(openCageList)
 
 # ----- Replace values ---------------------------------------------------------
 

@@ -55,7 +55,7 @@ for ( i in which(missingElevation_mask) ) {
 # ----- Review -----------------------------------------------------------------
 
 locationTbl[missingElevation_mask,] %>%
-  MazamaLocationUtils::table_leaflet(extraVars = "elevation")
+  MazamaLocationUtils::table_leaflet(extraVars = c("elevation", "address"))
 
 
 # ----- Save the table ---------------------------------------------------------
