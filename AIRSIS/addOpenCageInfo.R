@@ -17,7 +17,7 @@ setLocationDataDir(file.path(".", collectionDir))
 
 locationTbl <- table_load(collectionName)
 
-locationTbl %>% table_leaflet()
+locationTbl %>% table_leaflet(extraVars = c("elevation", "address"))
 
 
 # ----- Add OpenCage info ------------------------------------------------------
