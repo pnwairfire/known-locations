@@ -13,8 +13,8 @@ R package.
 Metadata generated with **MazamaLocationUtils** are manually corrected and 
 further enhanced using R scripts in this repository.
 
-The goal is to maintain a set of high-accuracy, high-value datasets that 
-provides data analysts spatial metadata associated with point locations without 
+The goal is to maintain a set of accurate, high-value datasets that 
+provide data analysts spatial metadata associated with point locations without 
 having to use any spatial analysis software.
 
 ----
