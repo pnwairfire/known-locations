@@ -1,4 +1,4 @@
-# Use a web service to add missing elevation data
+# Use a web service to add missing elevation data AFTER updating with OpenCage
 
 library(MazamaLocationUtils)
 
@@ -26,11 +26,15 @@ locationTbl[missingElevation_mask,] %>%
 
 # ----- Add elevations ---------------------------------------------------------
 
+message(sprintf("Getting %d missing elevations ...", sum(missingElevation_mask)))
+
 # NOTE:  This is a manual operation so print out progress
+count <- 0
 for ( i in which(missingElevation_mask) ) {
 
-  if ( (i %% 10) == 0 )
-    message(sprintf("Working on %d ...", i))
+  count <- count + 1
+  if ( (count %% 10) == 0 )
+    message(sprintf("Working on %d/%d ...", count, length(missingElevation_mask)))
 
   result <- try({
 
@@ -51,7 +55,7 @@ for ( i in which(missingElevation_mask) ) {
 # ----- Review -----------------------------------------------------------------
 
 locationTbl[missingElevation_mask,] %>%
-  MazamaLocationUtils::table_leaflet(extraVars = "elevation")
+  MazamaLocationUtils::table_leaflet(extraVars = c("elevation", "address"))
 
 
 # ----- Save the table ---------------------------------------------------------

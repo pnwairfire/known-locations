@@ -6,8 +6,8 @@ data is used in research projects and on-line tools such as the
 [Fire & Smoke Map](https://fire.airnow.gov).
 
 The `airnow_PM2.5_sites.csv` _"known locations"_ file is queried and updated
-during data processing and contains the most complete version of spatial data
-associated with AirNow monitoring sites.
+during data processing and contains the most complete version of the spatial 
+metadata associated with AirNow monitoring sites.
 
 ## Instructions
 

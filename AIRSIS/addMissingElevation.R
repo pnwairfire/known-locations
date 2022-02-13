@@ -1,23 +1,28 @@
-# Use a web service to add missing elevation data
+# Use a web service to add missing elevation data AFTER updating with OpenCage
 
-library(MazamaLocationUtils)
+# library(MazamaLocationUtils)
+#
+# collectionName <- "airsis_PM2.5_sites_1000"
+#
+# library(MazamaLocationUtils)
+#
+# collectionDir <- "AIRSIS"
+# collectionName <- "airsis_PM2.5_sites_1000"
+# collectionFile <- paste0(collectionName, ".rda")
+#
+# # ----- Load known locations ---------------------------------------------------
+#
+# download.file(
+#   file.path("http://data-monitoring_v2-c1.airfire.org/monitoring-v2/known-locations", collectionFile),
+#   destfile = file.path(".", collectionDir, collectionFile)
+# )
+#
+# setLocationDataDir(file.path(".", collectionDir))
+#
+# locationTbl <- table_load(collectionName)
 
-collectionName <- "airsis_PM2.5_sites_1000"
 
-# ----- Load and Review --------------------------------------------------------
-
-setLocationDataDir("./AIRSIS")
-
-locationTbl <- table_load(collectionName)
-
-# Fix locationTbl:
-# 1) airnow_FIPSMSACode once got converted to <dbl> after a manual update
-
-locationTbl <-
-  locationTbl %>%
-  dplyr::mutate(
-    airnow_FIPSMSACode = as.character(.data$airnow_FIPSMSACode)
-  )
+# ----- Review missing elevations ----------------------------------------------
 
 missingElevation_mask <- is.na(locationTbl$elevation)
 
@@ -34,7 +39,7 @@ for ( i in which(missingElevation_mask) ) {
 
   count <- count + 1
   if ( (count %% 10) == 0 )
-    message(sprintf("Working on %d ...", i))
+    message(sprintf("Working on %d/%d ...", count, length(missingElevation_mask)))
 
   result <- try({
 
@@ -55,7 +60,7 @@ for ( i in which(missingElevation_mask) ) {
 # ----- Review -----------------------------------------------------------------
 
 locationTbl[missingElevation_mask,] %>%
-  MazamaLocationUtils::table_leaflet(extraVars = "elevation")
+  MazamaLocationUtils::table_leaflet(extraVars = c("elevation", "address"))
 
 
 # ----- Save the table ---------------------------------------------------------

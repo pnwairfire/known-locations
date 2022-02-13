@@ -22,14 +22,14 @@ locationTbl %>% table_leaflet(extraVars = c("elevation", "address"))
 
 # ----- Add OpenCage info ------------------------------------------------------
 
-# TODO:  waiting on a fix in tidygeocoder
-
 locationTbl <- table_addOpenCageInfo(
   locationTbl,
   replaceExisting = FALSE,
   retainOpenCage = FALSE,
   verbose = FALSE
 )
+
+# NOTE:  Had to use the chunk below when I had a problem with tidygeocoder
 
 # openCageList <- list()
 #

@@ -17,18 +17,21 @@ setLocationDataDir(file.path(".", collectionDir))
 
 locationTbl <- table_load(collectionName)
 
-locationTbl %>% table_leaflet(extraVars = c("elevation", "address"))
+locationTbl %>%
+  dplyr::filter(is.na(.data$address)) %>%
+  table_leaflet(extraVars = c("elevation", "address"))
 
 
 # ----- Add OpenCage info ------------------------------------------------------
 
-# TODO:  waiting on a fix in tidygeocoder
-
 # locationTbl <- table_addOpenCageInfo(
 #   locationTbl,
-#   replaceExisting = TRUE,
+#   replaceExisting = FALSE,
+#   retainOpenCage = FALSE,
 #   verbose = FALSE
 # )
+
+# NOTE:  Had to use the chunk below when I had a problem with tidygeocoder
 
 openCageList <- list()
 
@@ -37,7 +40,8 @@ for ( i in seq_len(nrow(locationTbl)) ) {
   if ( (i %% 20) == 0 ) message("Working on ", i, " ...")
 
   openCageList[[i]] <-
-    MazamaLocationUtils::location_getOpenCageInfo(
+    ###MazamaLocationUtils::location_getOpenCageInfo(
+    location_getOpenCageInfo(
       longitude = locationTbl$longitude[i],
       latitude = locationTbl$latitude[i],
       verbose = FALSE
@@ -46,9 +50,9 @@ for ( i in seq_len(nrow(locationTbl)) ) {
 }
 
 
-newLocationTbl <- dplyr::bind_rows(openCageList)
+openCageTbl <- dplyr::bind_rows(openCageList)
 
-
+# TODO:  Paste sourceLines from MazamaLocationUtils::table_addOpenCageInfo()
 
 # ----- Review -----------------------------------------------------------------
 

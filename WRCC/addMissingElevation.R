@@ -34,7 +34,7 @@ for ( i in which(missingElevation_mask) ) {
 
   count <- count + 1
   if ( (count %% 10) == 0 )
-    message(sprintf("Working on %d ...", i))
+    message(sprintf("Working on %d/%d ...", count, length(missingElevation_mask)))
 
   result <- try({
 

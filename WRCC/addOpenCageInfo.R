@@ -20,15 +20,16 @@ locationTbl <- table_load(collectionName)
 locationTbl %>% table_leaflet(extraVars = c("elevation", "address"))
 
 
-# ----- GET OpenCage info ------------------------------------------------------
-
-# NOTE:  Need jsonlite 1.7.3 for this version to work.
+# ----- Add OpenCage info ------------------------------------------------------
 
 locationTbl <- table_addOpenCageInfo(
   locationTbl,
-  replaceExisting = TRUE,
+  replaceExisting = FALSE,
+  retainOpenCage = FALSE,
   verbose = FALSE
 )
+
+# NOTE:  Had to use the chunk below when I had a problem with tidygeocoder
 
 # openCageList <- list()
 #
@@ -47,103 +48,8 @@ locationTbl <- table_addOpenCageInfo(
 #
 #
 # openCageTbl <- dplyr::bind_rows(openCageList)
-
-# ----- Replace values ---------------------------------------------------------
-
-replaceExisting <- TRUE
-
-# * countryCode -----
-
-if ( replaceExisting ) {
-  locationTbl$countryCode <- toupper(openCageTbl$components.country_code)
-} else {
-  mask <- is.na(locationTbl$countryCode)
-  locationTbl$countryCode[mask] <- toupper(openCageTbl$components.country_code[mask])
-}
-
-# * stateCode -----
-
-if ( replaceExisting ) {
-  locationTbl$stateCode <- toupper(openCageTbl$components.state_code)
-} else {
-  mask <- is.na(locationTbl$stateCode)
-  locationTbl$stateCode[mask] <- toupper(openCageTbl$components.state_code[mask])
-}
-
-# * countyName -----
-
-if ( replaceExisting ) {
-  locationTbl$countyName <-
-    stringr::str_replace(openCageTbl$components.county, " County", "")
-} else {
-  mask <- is.na(locationTbl$countyName)
-  locationTbl$countyName[mask] <-
-    stringr::str_replace(openCageTbl$components.county[mask], " County", "")
-}
-
-# * timezone -----
-
-if ( replaceExisting ) {
-  locationTbl$timezone <- openCageTbl$annotations.timezone.name
-} else {
-  mask <- is.na(locationTbl$timezone)
-  locationTbl$timezone[mask] <- openCageTbl$annotations.timezone.name[mask]
-}
-
-# * houseNumber -----
-
-if ( replaceExisting ) {
-  locationTbl$houseNumber <- as.character(openCageTbl$components.house_number)
-} else {
-  mask <- is.na(locationTbl$houseNumber)
-  locationTbl$houseNumber[mask] <- as.character(openCageTbl$components.house_number[mask])
-}
-
-# * street -----
-
-if ( replaceExisting ) {
-  locationTbl$street <- as.character(openCageTbl$components.road)
-} else {
-  mask <- is.na(locationTbl$street)
-  locationTbl$street[mask] <- as.character(openCageTbl$components.road[mask])
-}
-
-# * city -----
-
-if ( replaceExisting ) {
-  locationTbl$city <- as.character(openCageTbl$components.town)
-} else {
-  mask <- is.na(locationTbl$city)
-  locationTbl$city[mask] <- as.character(openCageTbl$components.town[mask])
-}
-
-# NOTE:  Some OpenCage records are missing "town" but have "city" so add this
-# NOTE:  where records are still missing a value
-mask <- is.na(locationTbl$city)
-locationTbl$city[mask] <- as.character(openCageTbl$components.city[mask])
-
-# * city -----
-
-if ( replaceExisting ) {
-  locationTbl$zip <- as.character(openCageTbl$components.postcode)
-} else {
-  mask <- is.na(locationTbl$zip)
-  locationTbl$zip[mask] <- as.character(openCageTbl$components.postcode[mask])
-}
-
-# * address -----
-
-# NOTE:  'address' is not part of the core metdata but is very useful
-if ( !"address" %in% names(locationTbl) )
-  locationTbl$address <- as.character(NA)
-
-if ( replaceExisting ) {
-  locationTbl$address <- as.character(openCageTbl$address)
-} else {
-  mask <- is.na(locationTbl$address)
-  locationTbl$address[mask] <- as.character(openCageTbl$address[mask])
-}
-
+#
+# # TODO:  Paste sourceLines from MazamaLocationUtils::table_addOpenCageInfo()
 
 # ----- Review -----------------------------------------------------------------
 
