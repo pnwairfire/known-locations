@@ -49,7 +49,6 @@ for ( i in seq_len(nrow(locationTbl)) ) {
 
 }
 
-
 openCageTbl <- dplyr::bind_rows(openCageList)
 
 # TODO:  Paste sourceLines from MazamaLocationUtils::table_addOpenCageInfo()
