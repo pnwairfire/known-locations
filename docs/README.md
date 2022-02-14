@@ -17,6 +17,12 @@ The goal is to maintain a set of accurate, high-value datasets that
 provide data analysts spatial metadata associated with point locations without 
 having to use any spatial analysis software.
 
+# Collections
+
+* [AirNow PM2.5 sites](airnow_PM2.5_sites.html)
+* [AIRSIS PM2.5 sites](airsis_PM2.5_sites.html)
+* [WRCC PM2.5 sites](airnow_PM2.5_sites.html)
+
 ----
 
 This project is supported through funding from the US Forest Service.
