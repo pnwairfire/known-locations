@@ -23,8 +23,8 @@ Known locations are gathered into _"collections"_ associated with a specific
 measurement effort. As of Feb 14, 2022, current collections contain sites where 
 air quality monitoring devices are located. For the AIRSIS and WRCC collections
 of mobile monitors, a `distanceThreshold` a `distanceThreshold` of 1000 meters
-was chosen as a reasonable dividing line between "repositioning at a location"
-and "redeploying to a new location".
+was chosen as a reasonable dividing line between "repositioning at an
+existing location" and "redeploying to a new location".
 
 ## AirNow
 
