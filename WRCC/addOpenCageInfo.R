@@ -22,6 +22,9 @@ locationTbl %>%
   table_leaflet(extraVars = c("elevation", "address"))
 
 
+# TODO:  Need to be able to request OpenCage info only for records missing
+# TODO:  address information rather than always requesting for every record.
+
 # ----- Add OpenCage info ------------------------------------------------------
 
 # locationTbl <- table_addOpenCageInfo(
