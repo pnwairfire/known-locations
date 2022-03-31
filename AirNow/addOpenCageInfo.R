@@ -1,3 +1,5 @@
+# NOTE:  Run this script first, checking as you go. Then run the elevation script.
+
 # Use a web service to add missing elevation data
 
 library(MazamaLocationUtils)
@@ -16,18 +18,62 @@ download.file(
 setLocationDataDir(file.path(".", collectionDir))
 
 locationTbl <- table_load(collectionName)
+dim(locationTbl)
 
-locationTbl %>% table_leaflet(extraVars = c("elevation", "address"))
+# ----- Review duplicate locationIDs -------------------------------------------
 
+# NOTE:  We support duplicate locationIDs for AirNow because it is possible for
+
+# NOTE:    1) two different AQSIDs to share the same locationID
+# NOTE:    2) two different locationIDs to share the same AQSID
+
+# Sanity check: both of these should be FALSE
+any(is.na(locationTbl$AQSID))
+any(duplicated(paste0(locationTbl$locationID, "_", locationTbl$AQSID)))
+
+duplicateIDs <- locationTbl$locationID[duplicated(locationTbl$locationID)]
+
+duplicatesTbl <-
+  locationTbl %>%
+  dplyr::filter(locationID %in% duplicateIDs)
+
+duplicatesTbl %>%
+  dplyr::select(locationID, AQSID, locationName) %>%
+  dplyr::arrange(locationID) %>%
+  View()
+
+# ----- Subset and retain ordering ---------------------------------------------
+
+uniqueOnlyTbl <-
+  locationTbl %>%
+  dplyr::select(locationID, AQSID)
+
+hasAddressTbl <-
+  locationTbl %>%
+  dplyr::filter(!is.na(address))
+
+missingAddressTbl <-
+  locationTbl %>%
+  dplyr::filter(is.na(address))
+
+dim(uniqueOnlyTbl)
+dim(hasAddressTbl)
+dim(missingAddressTbl)
+
+# Review
+missingAddressTbl %>% table_leaflet(extraVars = c("elevation", "address"))
 
 # ----- Add OpenCage info ------------------------------------------------------
 
-locationTbl <- table_addOpenCageInfo(
-  locationTbl,
-  replaceExisting = FALSE,
+missingAddressTbl <- table_addOpenCageInfo(
+  missingAddressTbl,
+  replaceExisting = TRUE,
   retainOpenCage = FALSE,
   verbose = FALSE
 )
+
+# Review
+missingAddressTbl %>% table_leaflet(extraVars = c("elevation", "address"))
 
 # NOTE:  Had to use the chunk below when I had a problem with tidygeocoder
 
@@ -51,11 +97,22 @@ locationTbl <- table_addOpenCageInfo(
 #
 # # TODO:  Paste sourceLines from MazamaLocationUtils::table_addOpenCageInfo()
 
+# Combine two halves
+updatedLocationTbl <-
+  dplyr::bind_rows(hasAddressTbl, missingAddressTbl)
+
+# Use original ordering
+locationTbl <-
+  uniqueOnlyTbl %>%
+  dplyr::left_join(updatedLocationTbl, by = c("locationID", "AQSID"))
+
+# Sanity check: should be TRUE
+identical(uniqueOnlyTbl$locationID, locationTbl$locationID)
+
 # ----- Review -----------------------------------------------------------------
 
 locationTbl %>%
   MazamaLocationUtils::table_leaflet(extraVars = "address")
-
 
 # ----- Save the table ---------------------------------------------------------
 

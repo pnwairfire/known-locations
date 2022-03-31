@@ -20,7 +20,7 @@ having to use any spatial analysis software.
 # Collections
 
 Known locations are gathered into _"collections"_ associated with a specific
-measurement effort. As of Feb 14, 2022, current collections contain sites where 
+measurement effort. As of March 31, 2022, current collections contain sites where 
 air quality monitoring devices are located. For the AIRSIS and WRCC collections
 of mobile monitors, a `distanceThreshold` a `distanceThreshold` of 1000 meters
 was chosen as a reasonable dividing line between "repositioning at an

@@ -1,3 +1,5 @@
+# NOTE:  Run this script first, checking as you go. Then run the elevation script.
+
 # Use a web service to add missing elevation data
 
 library(MazamaLocationUtils)
