@@ -2,7 +2,8 @@
 
 March 31, 2022 update.
 
-* 
+* Updated to latest operational `airnow_PM2.5_sites`.
+* Added missing addresses and elevations to `airnow_PM2.5_sites`.
 
 # known-locations 0.0.4
 
