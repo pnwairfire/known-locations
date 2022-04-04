@@ -4,6 +4,8 @@ April 04, 2022 update.
 
 * Updated to latest operational `wrcc_PM2.5_sites_1000`.
 * Added missing addresses and elevations to `wrcc_PM2.5_sites_1000`.
+* Updated to latest operational `airsis_PM2.5_sites_1000`.
+* Added missing addresses and elevations to `airsis_PM2.5_sites_1000`.
 
 # known-locations 0.0.5
 
