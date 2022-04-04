@@ -75,29 +75,8 @@ missingAddressTbl <- table_addOpenCageInfo(
 # Review
 missingAddressTbl %>% table_leaflet(extraVars = c("elevation", "address"))
 
-# NOTE:  Had to use the chunk below when I had a problem with tidygeocoder
+# ----- Combine two halves -----------------------------------------------------
 
-# openCageList <- list()
-#
-# for ( i in seq_len(nrow(locationTbl)) ) {
-#
-#   if ( (i %% 20) == 0 ) message("Working on ", i, " ...")
-#
-#   openCageList[[i]] <-
-#     MazamaLocationUtils::location_getOpenCageInfo(
-#       longitude = locationTbl$longitude[i],
-#       latitude = locationTbl$latitude[i],
-#       verbose = FALSE
-#     )
-#
-# }
-#
-#
-# openCageTbl <- dplyr::bind_rows(openCageList)
-#
-# # TODO:  Paste sourceLines from MazamaLocationUtils::table_addOpenCageInfo()
-
-# Combine two halves
 updatedLocationTbl <-
   dplyr::bind_rows(hasAddressTbl, missingAddressTbl)
 
@@ -109,10 +88,8 @@ locationTbl <-
 # Sanity check: should be TRUE
 identical(uniqueOnlyTbl$locationID, locationTbl$locationID)
 
-# ----- Review -----------------------------------------------------------------
-
-locationTbl %>%
-  MazamaLocationUtils::table_leaflet(extraVars = "address")
+# Review
+locationTbl %>% MazamaLocationUtils::table_leaflet(extraVars = "address")
 
 # ----- Save the table ---------------------------------------------------------
 
