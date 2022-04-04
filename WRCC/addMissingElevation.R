@@ -17,7 +17,8 @@ locationTbl[missingElevation_mask,] %>%
 
 # ----- Add elevations ---------------------------------------------------------
 
-message(sprintf("Getting %d missing elevations ...", sum(missingElevation_mask)))
+missingCount <- sum(missingElevation_mask)
+message(sprintf("Getting %d missing elevations ...", missingCount))
 
 # NOTE:  This is a manual operation so print out progress
 count <- 0
@@ -25,7 +26,7 @@ for ( i in which(missingElevation_mask) ) {
 
   count <- count + 1
   if ( (count %% 10) == 0 )
-    message(sprintf("Working on %d/%d ...", count, length(missingElevation_mask)))
+    message(sprintf("Working on %d/%d ...", count, missingCount))
 
   result <- try({
 

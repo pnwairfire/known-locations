@@ -18,45 +18,80 @@ download.file(
 setLocationDataDir(file.path(".", collectionDir))
 
 locationTbl <- table_load(collectionName)
+dim(locationTbl)
 
-locationTbl %>%
-  dplyr::filter(is.na(.data$address)) %>%
-  table_leaflet(extraVars = c("elevation", "address"))
+# ----- Review duplicate locationIDs -------------------------------------------
 
+# Sanity check: both of these should be FALSE
+any(is.na(locationTbl$locationID))
+any(duplicated(locationTbl$locationID))
 
-# TODO:  Need to be able to request OpenCage info only for records missing
-# TODO:  address information rather than always requesting for every record.
+# ----- Subset and retain ordering ---------------------------------------------
+
+uniqueOnlyTbl <-
+  locationTbl %>%
+  dplyr::select(locationID)
+
+hasAddressTbl <-
+  locationTbl %>%
+  dplyr::filter(!is.na(address))
+
+missingAddressTbl <-
+  locationTbl %>%
+  dplyr::filter(is.na(address))
+
+dim(uniqueOnlyTbl)
+dim(hasAddressTbl)
+dim(missingAddressTbl)
+
+# Review
+missingAddressTbl %>% table_leaflet(extraVars = c("elevation", "address"))
 
 # ----- Add OpenCage info ------------------------------------------------------
 
-# locationTbl <- table_addOpenCageInfo(
-#   locationTbl,
-#   replaceExisting = FALSE,
-#   retainOpenCage = FALSE,
-#   verbose = FALSE
-# )
+missingAddressTbl <- table_addOpenCageInfo(
+  missingAddressTbl,
+  replaceExisting = TRUE,
+  retainOpenCage = FALSE,
+  verbose = FALSE
+)
+
+# Review
+missingAddressTbl %>% table_leaflet(extraVars = c("elevation", "address"))
 
 # NOTE:  Had to use the chunk below when I had a problem with tidygeocoder
 
-openCageList <- list()
+# openCageList <- list()
+#
+# for ( i in seq_len(nrow(locationTbl)) ) {
+#
+#   if ( (i %% 20) == 0 ) message("Working on ", i, " ...")
+#
+#   openCageList[[i]] <-
+#     MazamaLocationUtils::location_getOpenCageInfo(
+#       longitude = locationTbl$longitude[i],
+#       latitude = locationTbl$latitude[i],
+#       verbose = FALSE
+#     )
+#
+# }
+#
+#
+# openCageTbl <- dplyr::bind_rows(openCageList)
+#
+# # TODO:  Paste sourceLines from MazamaLocationUtils::table_addOpenCageInfo()
 
-for ( i in seq_len(nrow(locationTbl)) ) {
+# Combine two halves
+updatedLocationTbl <-
+  dplyr::bind_rows(hasAddressTbl, missingAddressTbl)
 
-  if ( (i %% 20) == 0 ) message("Working on ", i, " ...")
+# Use original ordering
+locationTbl <-
+  uniqueOnlyTbl %>%
+  dplyr::left_join(updatedLocationTbl, by = c("locationID"))
 
-  openCageList[[i]] <-
-    ###MazamaLocationUtils::location_getOpenCageInfo(
-    location_getOpenCageInfo(
-      longitude = locationTbl$longitude[i],
-      latitude = locationTbl$latitude[i],
-      verbose = FALSE
-    )
-
-}
-
-openCageTbl <- dplyr::bind_rows(openCageList)
-
-# TODO:  Paste sourceLines from MazamaLocationUtils::table_addOpenCageInfo()
+# Sanity check: should be TRUE
+identical(uniqueOnlyTbl$locationID, locationTbl$locationID)
 
 # ----- Review -----------------------------------------------------------------
 
