@@ -1,3 +1,10 @@
+# known-locations 0.0.6
+
+April 04, 2022 update.
+
+* Updated to latest operational `wrcc_PM2.5_sites_1000`.
+* Added missing addresses and elevations to `wrcc_PM2.5_sites_1000`.
+
 # known-locations 0.0.5
 
 March 31, 2022 update.
@@ -10,7 +17,6 @@ March 31, 2022 update.
 * Added `wrcc_PM2.5_sites_1000`
 * Updated `wrcc_PM2.5_sites_1000` for archival locations.
 * Updated to latest operational `airnow_PM2.5_sites`.
-* Added missing addresses and elevations to `airnow_PM2.5_sites`.
 * Added missing addresses and elevations to `airsis_PM2.5_sites_1000`.
 * Added missing addresses and elevations to `wrcc_PM2.5_sites_1000`.
 
