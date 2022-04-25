@@ -1,7 +1,7 @@
 ---
 title: "airnow_PM2.5_sites"
 author: "Jonathan Callahan"
-date: "March 31, 2022"
+date: "April 25, 2022"
 output: html_document
 ---
 
@@ -19,6 +19,11 @@ data is used in research projects and on-line tools such as the
 The `airnow_PM2.5_sites.csv` "known locations" file is queried and updated
 during data processing and contains the most complete version of the spatial 
 metadata associated with AirNow monitoring sites.
+
+_NOTE:  The AirNow "known locations" file is imperfect because it contains
+duplicated locations. This is needed to support the `AQSID` "site identifier"
+that is provided as part of the AirNow "site locations". It is the combination
+of `locationID` and `AQSID` that is unique._
 
 # Spatial Metadata
 
