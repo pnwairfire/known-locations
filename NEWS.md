@@ -1,3 +1,9 @@
+# known-locations 0.0.7
+
+May 18, 2022 update.
+
+* Updated `airnow`, `airsis` and `wrcc` PM2.5 known locations tables.
+
 # known-locations 0.0.6
 
 April 04, 2022 update.
