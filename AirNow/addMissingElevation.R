@@ -43,7 +43,8 @@ for ( i in which(missingElevation_mask) ) {
       location_getSingleElevation_USGS(
         longitude = locationTbl$longitude[i],
         latitude = locationTbl$latitude[i]
-      )
+      ) %>%
+      round(0) # Sub meter elevation precision is very unlikely
 
   }, silent = FALSE)
 
