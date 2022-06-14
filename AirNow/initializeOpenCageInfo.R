@@ -1,4 +1,5 @@
-# NOTE:  Run this script first, checking as you go. Then run the elevation script.
+# NOTE:  Run this script whn you are rebuilding a data archive and have a
+# NOTE:  brand new known locations table
 
 # Use a web service to add missing elevation data
 
@@ -10,10 +11,10 @@ collectionFile <- paste0(collectionName, ".rda")
 
 # ----- Load and Review --------------------------------------------------------
 
-download.file(
-  file.path("http://data-monitoring_v2-c1.airfire.org/monitoring-v2/known-locations", collectionFile),
-  destfile = file.path(".", collectionDir, collectionFile)
-)
+# download.file(
+#   file.path("http://data-monitoring_v2-c1.airfire.org/monitoring-v2/known-locations", collectionFile),
+#   destfile = file.path(".", collectionDir, collectionFile)
+# )
 
 setLocationDataDir(file.path(".", collectionDir))
 
@@ -68,12 +69,49 @@ missingAddressTbl %>% table_leaflet(extraVars = c("elevation", "address"))
 
 # ----- Add OpenCage info ------------------------------------------------------
 
-missingAddressTbl <- table_addOpenCageInfo(
-  missingAddressTbl,
-  replaceExisting = TRUE,
-  retainOpenCage = FALSE,
-  verbose = FALSE
-)
+# missingAddressTbl <- table_addOpenCageInfo(
+#   missingAddressTbl,
+#   replaceExisting = TRUE,
+#   retainOpenCage = FALSE,
+#   verbose = FALSE
+# )
+
+for ( i in seq_len(nrow(missingAddressTbl)) ) {
+
+  if ( (i %% 10) == 0 )
+    message(sprintf("Getting OpenCage info for %d of %d", i, nrow(missingAddressTbl)))
+
+  result <- try({
+
+  OpenCageList <-
+    location_getOpenCageInfo(
+      missingAddressTbl$longitude[i],
+      missingAddressTbl$latitude[i],
+      verbose = FALSE
+    )
+
+  if ( "address" %in% names(OpenCageList) )
+    missingAddressTbl$address[i] <- OpenCageList$address
+  if ( "components.country_code" %in% names(OpenCageList) )
+    missingAddressTbl$countryCode[i] <- toupper(OpenCageList$components.country_code)
+  if ( "components.state_code" %in% names(OpenCageList) )
+    missingAddressTbl$stateCode[i] <- toupper(OpenCageList$components.state_code)
+  if ( "annotations.timezone.name" %in% names(OpenCageList) )
+    missingAddressTbl$timezone[i] <- OpenCageList$annotations.timezone.name
+  if ( "components.countyName" %in% names(OpenCageList) )
+    missingAddressTbl$county[i] <- OpenCageList$components.county %>% stringr::str_replace(" County", "")
+  if ( "components.house_number" %in% names(OpenCageList) )
+    missingAddressTbl$houseNumber[i] <- OpenCageList$components.house_number
+  if ( "components.road" %in% names(OpenCageList) )
+    missingAddressTbl$street[i] <- OpenCageList$components.road
+  if ( "components.town" %in% names(OpenCageList) )
+    missingAddressTbl$city[i] <- OpenCageList$components.town
+  if ( "components.postcode" %in% names(OpenCageList) )
+    missingAddressTbl$zip[i] <- OpenCageList$components.postcode
+
+  }, silent = TRUE)
+
+}
 
 # Review
 missingAddressTbl %>% table_leaflet(extraVars = c("elevation", "address"))
