@@ -33,14 +33,53 @@ any(duplicated(paste0(locationTbl$locationID, "_", locationTbl$fullAQSID)))
 
 duplicateIDs <- locationTbl$locationID[duplicated(locationTbl$locationID)]
 
-duplicatesTbl <-
-  locationTbl %>%
-  dplyr::filter(locationID %in% duplicateIDs)
+if ( length(duplicateIDs) > 0 ) {
 
-duplicatesTbl %>%
-  dplyr::select(locationID, fullAQSID, locationName) %>%
-  dplyr::arrange(locationID) %>%
-  View()
+  duplicatesTbl <-
+    locationTbl %>%
+    dplyr::filter(locationID %in% duplicateIDs)
+
+  duplicatesTbl %>%
+    dplyr::select(locationID, fullAQSID, locationName) %>%
+    dplyr::arrange(locationID) %>%
+    View()
+
+}
+
+# ----- Manual updates ---------------------------------------------------------
+
+# NOTE:  This is the place to review the location table visually and make any
+# NOTE:  manual fixes.
+# NOTE:
+# NOTE:  For example, if want to remove multiple locations associated with a
+# NOTE:  single fullAQSID, this would be the place to do it.
+
+if ( FALSE ) {
+
+  duplicates_locationTbl <-
+    locationTbl %>%
+    dplyr::filter(fullAQSID == "840MMCA83999")
+
+  duplicates_locationTbl %>%
+    table_leaflet(jitter = 0)
+
+  preferredLocationTbl <-
+    AirMonitorIngest::airnow_getSites() %>%
+    dplyr::filter(fullAQSID == "840MMCA83999")
+
+  preferred_locationID <-
+    MazamaCoreUtils::createLocationID(
+      preferredLocationTbl$longitude,
+      preferredLocationTbl$latitude
+    )
+
+  badIDs <- setdiff(duplicates_locationTbl$locationID, preferred_locationID)
+
+  locationTbl <-
+    locationTbl %>%
+    table_removeRecord(locationID = badIDs, verbose = TRUE)
+
+}
 
 # ----- Subset and retain ordering ---------------------------------------------
 

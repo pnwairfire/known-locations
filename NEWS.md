@@ -1,3 +1,15 @@
+# known-locations 0.1.0
+
+June 22, 2022 update.
+
+Updated all data processing components and scripts to use `fullAQSID` as the
+AirNow unique identifier.
+
+* Updated `airnow`, `airsis` and `wrcc` PM2.5 known locations tables.
+* Removed some locations associated with AirNow `840MMCA83999` which has a new
+cell phone-based transmitter and needs a 500m `distanceThreshold` when finding
+locations. We will keep the AirNow location associated with this `fullAQSID`.
+
 # known-locations 0.0.7
 
 May 18, 2022 update.
