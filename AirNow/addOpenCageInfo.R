@@ -32,6 +32,7 @@ any(is.na(locationTbl$fullAQSID))
 any(duplicated(paste0(locationTbl$locationID, "_", locationTbl$fullAQSID)))
 
 duplicateIDs <- locationTbl$locationID[duplicated(locationTbl$locationID)]
+print(length(duplicateIDs)) # zero is what we hope for
 
 if ( length(duplicateIDs) > 0 ) {
 
@@ -58,14 +59,23 @@ if ( FALSE ) {
 
   duplicates_locationTbl <-
     locationTbl %>%
-    dplyr::filter(fullAQSID == "840MMCA83999")
+    dplyr::filter(fullAQSID == "840MMFS11043")
 
-  duplicates_locationTbl %>%
-    table_leaflet(jitter = 0)
+  map <-
+    table_leaflet(
+      duplicates_locationTbl,
+      jitter = 0
+    )
 
   preferredLocationTbl <-
     AirMonitorIngest::airnow_getSites() %>%
-    dplyr::filter(fullAQSID == "840MMCA83999")
+    dplyr::filter(fullAQSID == "840MMFS11043")
+
+  table_leafletAdd(
+    map,
+    preferredLocationTbl,
+    jitter = 0
+  )
 
   preferred_locationID <-
     MazamaCoreUtils::createLocationID(
@@ -79,6 +89,17 @@ if ( FALSE ) {
     locationTbl %>%
     table_removeRecord(locationID = badIDs, verbose = TRUE)
 
+  ###
+  # Custom removal of a single ID
+  ###
+
+  locationTbl <-
+    locationTbl %>%
+    table_removeRecord(locationID = "d4ba731653a47dfe", verbose = TRUE)
+
+
+
+
 }
 
 # ----- Subset and retain ordering ---------------------------------------------
@@ -87,7 +108,7 @@ uniqueOnlyTbl <-
   locationTbl %>%
   dplyr::select(locationID, fullAQSID)
 
-if ( !"address" %in% locationTbl )
+if ( !"address" %in% names(locationTbl) )
   locationTbl$address <- as.character(NA)
 
 hasAddressTbl <-
@@ -103,7 +124,11 @@ dim(hasAddressTbl)
 dim(missingAddressTbl)
 
 # Review
-missingAddressTbl %>% table_leaflet(extraVars = c("elevation", "address"))
+missingAddressTbl %>%
+  table_leaflet(
+    extraVars = c("fullAQSID", "elevation", "address"),
+    jitter = 0
+  )
 
 # ----- Add OpenCage info ------------------------------------------------------
 
@@ -115,7 +140,11 @@ missingAddressTbl <- table_addOpenCageInfo(
 )
 
 # Review
-missingAddressTbl %>% table_leaflet(extraVars = c("elevation", "address"))
+missingAddressTbl %>%
+  table_leaflet(
+    extraVars = c("elevation", "address"),
+    jitter = 0
+  )
 
 # ----- Combine two halves -----------------------------------------------------
 

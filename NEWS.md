@@ -1,6 +1,6 @@
 # known-locations 0.1.0
 
-June 22, 2022 update.
+June 23, 2022 update.
 
 Updated all data processing components and scripts to use `fullAQSID` as the
 AirNow unique identifier.
