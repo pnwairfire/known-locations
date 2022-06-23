@@ -55,6 +55,7 @@ MazamaLocationUtils::table_leaflet(
     "elevation",
     "address"
   ),
+  jitter = 0,
   radius = 6,
   color = "black",
   weight = 2,

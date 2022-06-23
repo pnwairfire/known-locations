@@ -13,7 +13,10 @@ locationTbl <- table_load(collectionName)
 missingElevation_mask <- is.na(locationTbl$elevation)
 
 locationTbl[missingElevation_mask,] %>%
-  MazamaLocationUtils::table_leaflet(extraVars = "elevation")
+  MazamaLocationUtils::table_leaflet(
+    extraVars = "elevation",
+    jitter = 0
+  )
 
 # ----- Add elevations ---------------------------------------------------------
 
@@ -48,8 +51,10 @@ for ( i in which(missingElevation_mask) ) {
 # ----- Review -----------------------------------------------------------------
 
 locationTbl[missingElevation_mask,] %>%
-  MazamaLocationUtils::table_leaflet(extraVars = c("elevation", "address"))
-
+  MazamaLocationUtils::table_leaflet(
+    extraVars = c("elevation", "address"),
+    jitter = 0
+  )
 
 # ----- Save the table ---------------------------------------------------------
 
