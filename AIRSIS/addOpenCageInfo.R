@@ -45,7 +45,11 @@ dim(hasAddressTbl)
 dim(missingAddressTbl)
 
 # Review
-missingAddressTbl %>% table_leaflet(extraVars = c("elevation", "address"))
+missingAddressTbl %>%
+  table_leaflet(
+    extraVars = c("fullAQSID", "elevation", "address"),
+    jitter = 0
+  )
 
 # ----- Add OpenCage info ------------------------------------------------------
 
@@ -57,7 +61,11 @@ missingAddressTbl <- table_addOpenCageInfo(
 )
 
 # Review
-missingAddressTbl %>% table_leaflet(extraVars = c("elevation", "address"))
+missingAddressTbl %>%
+  table_leaflet(
+    extraVars = c("fullAQSID", "elevation", "address"),
+    jitter = 0
+  )
 
 # ----- Combine two halves -----------------------------------------------------
 
@@ -73,7 +81,11 @@ locationTbl <-
 identical(uniqueOnlyTbl$locationID, locationTbl$locationID)
 
 # Review
-locationTbl %>% MazamaLocationUtils::table_leaflet(extraVars = "address")
+locationTbl %>%
+  MazamaLocationUtils::table_leaflet(
+    extraVars = c("fullAQSID", "elevation", "address"),
+    jitter = 0
+  )
 
 # ----- Save the table ---------------------------------------------------------
 
