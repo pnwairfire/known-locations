@@ -20,9 +20,45 @@ setLocationDataDir(file.path(".", collectionDir))
 locationTbl <- table_load(collectionName)
 dim(locationTbl)
 
+# ----- Review adjacent locations ----------------------------------------------
+
+adjacent_kl <-
+  locationTbl %>%
+  table_findAdjacentLocations(distanceThreshold = 200) # 500 is the actual separation we use
+
+map <-
+  adjacent_kl %>%
+  MazamaLocationUtils::table_leaflet(
+    extraVars = c("locationName", "fullAQSID"),
+    jitter = 0
+  )
+
+plot(map)
+
+sites <- AirMonitorIngest::airnow_getSites()
+
+adjacent_sites <-
+  sites %>%
+  table_findAdjacentLocations(distanceThreshold = 200) # 500 is the actual separation we use
+
+map <-
+  adjacent_sites %>%
+  MazamaLocationUtils::table_leaflet(
+    extraVars = c("locationName", "fullAQSID"),
+    jitter = 0
+  )
+
+plot(map)
+
+
+
 # ----- Problem to fix ---------------------------------------------------------
 
-locationTbl %>% MazamaLocationUtils::table_leaflet(extraVars = "locationName")
+locationTbl %>%
+  MazamaLocationUtils::table_leaflet(
+    extraVars = c("locationName", "fullAQSID"),
+    jitter = 0
+  )
 
 # Two locations west of Denver should be named "Rocky Mtn Fire Cache"
 
