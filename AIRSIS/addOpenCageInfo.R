@@ -45,11 +45,15 @@ dim(hasAddressTbl)
 dim(missingAddressTbl)
 
 # Review
-missingAddressTbl %>%
-  table_leaflet(
-    extraVars = c("fullAQSID", "elevation", "address"),
-    jitter = 0
-  )
+if ( nrow(missingAddressTbl) > 0 ) {
+
+  missingAddressTbl %>%
+    table_leaflet(
+      extraVars = c("fullAQSID", "elevation", "address"),
+      jitter = 0
+    )
+
+}
 
 # ----- Add OpenCage info ------------------------------------------------------
 
