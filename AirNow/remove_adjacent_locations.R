@@ -20,45 +20,13 @@ setLocationDataDir(file.path(".", collectionDir))
 locationTbl <- table_load(collectionName)
 dim(locationTbl)
 
-# ----- Load sites and review --------------------------------------------------
-
-# NOTE:  We only use a subset of the sites metdata so this is optional
-
-# if ( FALSE ) {
-#
-#   sites <-
-#     AirMonitorIngest::airnow_getSites() %>%
-#     dplyr::filter(parameterName == "PM2.5") %>%
-#     dplyr::filter(countryFIPS %in% c("CA", "US", "MX"))
-#
-#   dim(sites)
-#
-#   sites %>%
-#     table_leaflet(
-#       extraVars = c("siteName", "fullAQSID", "monitorType", "countryFIPS"),
-#       jitter = 0
-#     )
-#
-#   adjacent_sites <-
-#     sites %>%
-#     table_findAdjacentLocations(distanceThreshold = 200) # 500 is the actual separation we use
-#
-#   map <-
-#     adjacent_sites %>%
-#     table_leaflet(
-#       extraVars = c("siteName", "fullAQSID"),
-#       jitter = 0
-#     )
-#
-#   print(map)
-#
-# }
-
 # ----- Review adjacent locations ----------------------------------------------
 
 adjacent_kl <-
   locationTbl %>%
   table_findAdjacentLocations(distanceThreshold = 200) # 500 is the actual separation we use
+
+dim(adjacent_kl)
 
 map <-
   adjacent_kl %>%
