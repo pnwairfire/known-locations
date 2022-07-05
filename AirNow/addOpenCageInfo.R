@@ -89,6 +89,7 @@ if ( FALSE ) {
     locationTbl %>%
     table_removeRecord(locationID = badIDs, verbose = TRUE)
 
+
   ###
   # Custom removal of a single ID
   ###
@@ -98,6 +99,13 @@ if ( FALSE ) {
     table_removeRecord(locationID = "d4ba731653a47dfe", verbose = TRUE)
 
 
+  ###
+  # Custom removal of a single ID
+  ###
+
+  locationTbl <-
+    locationTbl %>%
+    dplyr::filter(fullAQSID != "840MMFS13203")
 
 
 }
