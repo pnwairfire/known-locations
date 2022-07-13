@@ -69,7 +69,8 @@ if ( FALSE ) {
 
   preferredLocationTbl <-
     AirMonitorIngest::airnow_getSites() %>%
-    dplyr::filter(fullAQSID == "840MMFS11043")
+    dplyr::filter(parameterName == "PM2.5") %>%
+    dplyr::filter(status == "Active")
 
   table_leafletAdd(
     map,
@@ -94,18 +95,18 @@ if ( FALSE ) {
   # Custom removal of a single ID
   ###
 
-  locationTbl <-
-    locationTbl %>%
-    table_removeRecord(locationID = "d4ba731653a47dfe", verbose = TRUE)
+  # locationTbl <-
+  #   locationTbl %>%
+  #   table_removeRecord(locationID = "d4ba731653a47dfe", verbose = TRUE)
 
 
   ###
   # Custom removal of a single ID
   ###
 
-  locationTbl <-
-    locationTbl %>%
-    dplyr::filter(fullAQSID != "840MMFS13203")
+  # locationTbl <-
+  #   locationTbl %>%
+  #   dplyr::filter(fullAQSID != "840MMFS13203")
 
 
 }
