@@ -20,7 +20,6 @@ setLocationDataDir(file.path(".", collectionDir))
 locationTbl <- table_load(collectionName)
 dim(locationTbl)
 
-
 # ----- Problem to fix ---------------------------------------------------------
 
 locationTbl %>%
@@ -29,15 +28,23 @@ locationTbl %>%
     jitter = 0
   )
 
-# A location west of Denver should be named "Rocky Mtn Fire Cache"
+# NOTE:  Could also use MazamaLocationUtils::table_updateSingleRecord()
 
-locationIDs <- c("aa1a1b7e023a61ad")
+locationIDs <- c("d9c1a2c884e60130")
+locationTbl[locationTbl$locationID %in% locationIDs, "locationName"] <- "Oakhurst"
 
-locationTbl[locationTbl$locationID %in% locationIDs, "locationName"] <- "Rocky Mtn Fire Cache"
+locationIDs <- c("786ab2a4f8f46681")
+locationTbl[locationTbl$locationID %in% locationIDs, "locationName"] <- "Minaret Creek"
+
+locationIDs <- c("61f086f696f109b0")
+locationTbl[locationTbl$locationID %in% locationIDs, "locationName"] <- "Mammoth Lakes"
+
+locationIDs <- c("16d71b0a47a77f39")
+locationTbl[locationTbl$locationID %in% locationIDs, "locationName"] <- "Devil's Postpile"
+
 
 # Review
 locationTbl %>% MazamaLocationUtils::table_leaflet(extraVars = "locationName")
-
 
 # ----- Save the table ---------------------------------------------------------
 
