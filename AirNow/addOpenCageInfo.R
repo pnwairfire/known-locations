@@ -141,7 +141,7 @@ missingAddressTbl %>%
 
 # ----- Add OpenCage info ------------------------------------------------------
 
-Sys.setenv("OPENCAGE_KEY" = "<YOUR_KEY>")
+Sys.setenv("OPENCAGE_KEY" = OPENCAGE_API_KEY)
 
 missingAddressTbl <- table_addOpenCageInfo(
   missingAddressTbl,

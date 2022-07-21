@@ -30,17 +30,20 @@ locationTbl %>%
 
 # NOTE:  Could also use MazamaLocationUtils::table_updateSingleRecord()
 
-locationIDs <- c("d9c1a2c884e60130")
-locationTbl[locationTbl$locationID %in% locationIDs, "locationName"] <- "Oakhurst"
+locationIDs <- c("9e06ddbd5f5e1d2f")
+locationTbl[locationTbl$locationID %in% locationIDs, "locationName"] <- "Red Bluff"
 
-locationIDs <- c("786ab2a4f8f46681")
-locationTbl[locationTbl$locationID %in% locationIDs, "locationName"] <- "Minaret Creek"
+locationIDs <- c("74e0ef973916e244")
+locationTbl[locationTbl$locationID %in% locationIDs, "locationName"] <- "Bella Vista"
 
-locationIDs <- c("61f086f696f109b0")
-locationTbl[locationTbl$locationID %in% locationIDs, "locationName"] <- "Mammoth Lakes"
+locationIDs <- c("6b06028001ac0f6f")
+locationTbl[locationTbl$locationID %in% locationIDs, "locationName"] <- "Mineral"
 
-locationIDs <- c("16d71b0a47a77f39")
-locationTbl[locationTbl$locationID %in% locationIDs, "locationName"] <- "Devil's Postpile"
+locationIDs <- c("a429b3f0992869a4")
+locationTbl[locationTbl$locationID %in% locationIDs, "locationName"] <- "Round Mountain"
+
+locationIDs <- c("07454c54ae3963f0")
+locationTbl[locationTbl$locationID %in% locationIDs, "locationName"] <- "Burney"
 
 
 # Review
