@@ -122,16 +122,26 @@ print(map)
 # )
 
 
-# On 2022-06-28
+# # On 2022-06-28
+#
+# badIDs <- c(
+#   # NM
+#   "a5cc95dacaa954b2",
+#   # MT
+#   "d65023bd11de1e16",
+#   # CA
+#   "ac99ff93ffe38cb8", "bd644b571433095f", "0bef3590099e0682"
+# )
+
+# On 2022-08-08
 #
 
 badIDs <- c(
-  # NM
-  "a5cc95dacaa954b2",
-  # MT
-  "d65023bd11de1e16",
+  # ID
+  "677bb45d81f47bb6", "3a64bb0e0488e5b3",
   # CA
-  "ac99ff93ffe38cb8", "bd644b571433095f", "0bef3590099e0682"
+  "60a8ddd37911d9b5", "4c9714779b8cbe13", "26e2936f2fd2dc86", "8a049201c21aa8be",
+  "671ec3d58035d34e", "44f731891be357b4"
 )
 
 locationTbl <-

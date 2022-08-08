@@ -28,3 +28,6 @@ copy_to_ingest_test:
 	-cp AirNow/airnow_PM2.5_sites.rda $(INGEST_TEST_DIR)/
 	-cp AIRSIS/airsis_PM2.5_sites_1000.rda $(INGEST_TEST_DIR)/
 	-cp WRCC/wrcc_PM2.5_sites_1000.rda $(INGEST_TEST_DIR)/
+
+copy: copy_to_docs copy_to_ingest_test
+
