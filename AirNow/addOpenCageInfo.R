@@ -171,7 +171,7 @@ locationTbl <-
 identical(uniqueOnlyTbl$locationID, locationTbl$locationID)
 
 # Review
-locationTbl %>% MazamaLocationUtils::table_leaflet(extraVars = "address")
+###locationTbl %>% MazamaLocationUtils::table_leaflet(extraVars = "address")
 
 # ----- Save the table ---------------------------------------------------------
 
