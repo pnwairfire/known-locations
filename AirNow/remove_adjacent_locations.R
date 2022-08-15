@@ -28,6 +28,9 @@ adjacent_kl <-
 
 dim(adjacent_kl)
 
+# Two monitors in Calgary are only a block apart
+# If nrow(adjacent_kl) > 2, review the map
+
 map <-
   adjacent_kl %>%
   MazamaLocationUtils::table_leaflet(

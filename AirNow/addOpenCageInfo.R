@@ -47,70 +47,6 @@ if ( length(duplicateIDs) > 0 ) {
 
 }
 
-# ----- Manual updates ---------------------------------------------------------
-
-# NOTE:  This is the place to review the location table visually and make any
-# NOTE:  manual fixes.
-# NOTE:
-# NOTE:  For example, if want to remove multiple locations associated with a
-# NOTE:  single fullAQSID, this would be the place to do it.
-
-if ( FALSE ) {
-
-  duplicates_locationTbl <-
-    locationTbl %>%
-    dplyr::filter(fullAQSID == "840MMFS11043")
-
-  map <-
-    table_leaflet(
-      duplicates_locationTbl,
-      jitter = 0
-    )
-
-  preferredLocationTbl <-
-    AirMonitorIngest::airnow_getSites() %>%
-    dplyr::filter(parameterName == "PM2.5") %>%
-    dplyr::filter(status == "Active")
-
-  table_leafletAdd(
-    map,
-    preferredLocationTbl,
-    jitter = 0
-  )
-
-  preferred_locationID <-
-    MazamaCoreUtils::createLocationID(
-      preferredLocationTbl$longitude,
-      preferredLocationTbl$latitude
-    )
-
-  badIDs <- setdiff(duplicates_locationTbl$locationID, preferred_locationID)
-
-  locationTbl <-
-    locationTbl %>%
-    table_removeRecord(locationID = badIDs, verbose = TRUE)
-
-
-  ###
-  # Custom removal of a single ID
-  ###
-
-  # locationTbl <-
-  #   locationTbl %>%
-  #   table_removeRecord(locationID = "d4ba731653a47dfe", verbose = TRUE)
-
-
-  ###
-  # Custom removal of a single ID
-  ###
-
-  # locationTbl <-
-  #   locationTbl %>%
-  #   dplyr::filter(fullAQSID != "840MMFS13203")
-
-
-}
-
 # ----- Subset and retain ordering ---------------------------------------------
 
 uniqueOnlyTbl <-
@@ -132,12 +68,17 @@ dim(uniqueOnlyTbl)
 dim(hasAddressTbl)
 dim(missingAddressTbl)
 
+
 # Review
-missingAddressTbl %>%
-  table_leaflet(
-    extraVars = c("fullAQSID", "elevation", "address"),
-    jitter = 0
-  )
+if ( nrow(missingAddressTbl) > 0 ) {
+
+  missingAddressTbl %>%
+    table_leaflet(
+      extraVars = c("fullAQSID", "elevation", "address"),
+      jitter = 0
+    )
+
+}
 
 # ----- Add OpenCage info ------------------------------------------------------
 
