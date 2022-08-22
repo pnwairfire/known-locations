@@ -1,6 +1,6 @@
 # NOTE:  Run this script first, checking as you go. Then run the elevation script.
 
-# Use a web service to add missing elevation data
+# Use a web service to add missing address data
 
 library(MazamaLocationUtils)
 
@@ -43,6 +43,8 @@ missingAddressTbl <-
 dim(uniqueOnlyTbl)
 dim(hasAddressTbl)
 dim(missingAddressTbl)
+
+# NOTE:  If there are no records with missing addresses, you can stop here.
 
 # Review
 if ( nrow(missingAddressTbl) > 0 ) {

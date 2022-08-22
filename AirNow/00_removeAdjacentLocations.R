@@ -31,14 +31,18 @@ dim(adjacent_kl)
 # Two monitors in Calgary are only a block apart
 # If nrow(adjacent_kl) > 2, review the map
 
-map <-
-  adjacent_kl %>%
-  MazamaLocationUtils::table_leaflet(
-    extraVars = c("locationName", "fullAQSID"),
-    jitter = 0
-  )
+if ( nrow(adjacent_kl) > 2 ) {
 
-print(map)
+  map <-
+    adjacent_kl %>%
+    MazamaLocationUtils::table_leaflet(
+      extraVars = c("locationName", "fullAQSID"),
+      jitter = 0
+    )
+
+  print(map)
+
+}
 
 # ----- Locations to drop ------------------------------------------------------
 

@@ -4,8 +4,8 @@
 
 library(MazamaLocationUtils)
 
-collectionDir <- "WRCC"
-collectionName <- "wrcc_PM2.5_sites_1000"
+collectionDir <- "AirNow"
+collectionName <- "airnow_PM2.5_sites"
 collectionFile <- paste0(collectionName, ".rda")
 
 # ----- Load and Review --------------------------------------------------------
@@ -22,15 +22,39 @@ dim(locationTbl)
 
 # ----- Review duplicate locationIDs -------------------------------------------
 
+# NOTE:  We support duplicate locationIDs for AirNow because it is possible for
+
+# NOTE:    1) two different fullAQSIDs to share the same locationID
+# NOTE:    2) two different locationIDs to share the same fullAQSID
+
 # Sanity check: both of these should be FALSE
-any(is.na(locationTbl$locationID))
-any(duplicated(locationTbl$locationID))
+any(is.na(locationTbl$fullAQSID))
+any(duplicated(paste0(locationTbl$locationID, "_", locationTbl$fullAQSID)))
+
+duplicateIDs <- locationTbl$locationID[duplicated(locationTbl$locationID)]
+print(length(duplicateIDs)) # zero is what we hope for
+
+if ( length(duplicateIDs) > 0 ) {
+
+  duplicatesTbl <-
+    locationTbl %>%
+    dplyr::filter(locationID %in% duplicateIDs)
+
+  duplicatesTbl %>%
+    dplyr::select(locationID, fullAQSID, locationName) %>%
+    dplyr::arrange(locationID) %>%
+    View()
+
+}
 
 # ----- Subset and retain ordering ---------------------------------------------
 
 uniqueOnlyTbl <-
   locationTbl %>%
-  dplyr::select(locationID)
+  dplyr::select(locationID, fullAQSID)
+
+if ( !"address" %in% names(locationTbl) )
+  locationTbl$address <- as.character(NA)
 
 hasAddressTbl <-
   locationTbl %>%
@@ -43,6 +67,8 @@ missingAddressTbl <-
 dim(uniqueOnlyTbl)
 dim(hasAddressTbl)
 dim(missingAddressTbl)
+
+# NOTE:  If there are no records with missing addresses, you can stop here.
 
 # Review
 if ( nrow(missingAddressTbl) > 0 ) {
@@ -57,6 +83,8 @@ if ( nrow(missingAddressTbl) > 0 ) {
 
 # ----- Add OpenCage info ------------------------------------------------------
 
+Sys.setenv("OPENCAGE_KEY" = OPENCAGE_API_KEY)
+
 missingAddressTbl <- table_addOpenCageInfo(
   missingAddressTbl,
   replaceExisting = TRUE,
@@ -67,7 +95,7 @@ missingAddressTbl <- table_addOpenCageInfo(
 # Review
 missingAddressTbl %>%
   table_leaflet(
-    extraVars = c("fullAQSID", "elevation", "address"),
+    extraVars = c("elevation", "address"),
     jitter = 0
   )
 
@@ -79,17 +107,13 @@ updatedLocationTbl <-
 # Use original ordering
 locationTbl <-
   uniqueOnlyTbl %>%
-  dplyr::left_join(updatedLocationTbl, by = c("locationID"))
+  dplyr::left_join(updatedLocationTbl, by = c("locationID", "fullAQSID"))
 
 # Sanity check: should be TRUE
 identical(uniqueOnlyTbl$locationID, locationTbl$locationID)
 
 # Review
-locationTbl %>%
-  MazamaLocationUtils::table_leaflet(
-    extraVars = c("fullAQSID", "elevation", "address"),
-    jitter = 0
-  )
+###locationTbl %>% MazamaLocationUtils::table_leaflet(extraVars = "address")
 
 # ----- Save the table ---------------------------------------------------------
 
@@ -107,5 +131,7 @@ table_save(
   outputType = "rda"
 )
 
+
+# NOTE:  Now you should walk through 02_addMissingElevation.R
 
 

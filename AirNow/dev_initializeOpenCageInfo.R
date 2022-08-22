@@ -1,4 +1,4 @@
-# NOTE:  Run this script whn you are rebuilding a data archive and have a
+# NOTE:  Run this script when you are rebuilding a data archive and have a
 # NOTE:  brand new known locations table
 
 # Use a web service to add missing elevation data
