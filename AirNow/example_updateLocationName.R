@@ -18,9 +18,8 @@ download.file(
 setLocationDataDir(file.path(".", collectionDir))
 
 locationTbl <- table_load(collectionName)
-dim(locationTbl)
 
-# ----- Problem to fix ---------------------------------------------------------
+# ----- Names to update --------------------------------------------------------
 
 locationTbl %>%
   MazamaLocationUtils::table_leaflet(
@@ -30,21 +29,8 @@ locationTbl %>%
 
 # NOTE:  Could also use MazamaLocationUtils::table_updateSingleRecord()
 
-locationIDs <- c("9e06ddbd5f5e1d2f")
-locationTbl[locationTbl$locationID %in% locationIDs, "locationName"] <- "Red Bluff"
-
-locationIDs <- c("74e0ef973916e244")
-locationTbl[locationTbl$locationID %in% locationIDs, "locationName"] <- "Bella Vista"
-
-locationIDs <- c("6b06028001ac0f6f")
-locationTbl[locationTbl$locationID %in% locationIDs, "locationName"] <- "Mineral"
-
-locationIDs <- c("a429b3f0992869a4")
-locationTbl[locationTbl$locationID %in% locationIDs, "locationName"] <- "Round Mountain"
-
-locationIDs <- c("07454c54ae3963f0")
-locationTbl[locationTbl$locationID %in% locationIDs, "locationName"] <- "Burney"
-
+locationIDs <- c("aa1a1b7e023a61ad")
+locationTbl[locationTbl$locationID %in% locationIDs, "locationName"] <- "Rocky Mtn Fire Cache"
 
 # Review
 locationTbl %>% MazamaLocationUtils::table_leaflet(extraVars = "locationName")
