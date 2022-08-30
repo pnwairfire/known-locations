@@ -20,8 +20,6 @@ setLocationDataDir(file.path(".", collectionDir))
 locationTbl <- table_load(collectionName)
 dim(locationTbl)
 
-# ----- Review duplicate locationIDs -------------------------------------------
-
 # Sanity check: both of these should be FALSE
 any(is.na(locationTbl$locationID))
 any(duplicated(locationTbl$locationID))
