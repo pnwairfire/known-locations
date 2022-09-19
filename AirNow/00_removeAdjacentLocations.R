@@ -26,14 +26,14 @@ dim(locationTbl)
 
 adjacent_kl <-
   locationTbl %>%
-  table_findAdjacentLocations(distanceThreshold = 200) # 500 is the actual separation we use
+  table_findAdjacentLocations(distanceThreshold = 100) # 500 is the actual separation we use
 
 dim(adjacent_kl)
 
-# Two monitors in Calgary are only a block apart
-# If nrow(adjacent_kl) > 2, review the map
+# NOTE:  Two monitors in Calgary are < 200m apart
+# If nrow(adjacent_kl) > 0, review the map
 
-if ( nrow(adjacent_kl) > 2 ) {
+if ( nrow(adjacent_kl) > 0 ) {
 
   map <-
     adjacent_kl %>%
