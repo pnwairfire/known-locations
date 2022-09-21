@@ -26,7 +26,7 @@ dim(locationTbl)
 
 adjacent_kl <-
   locationTbl %>%
-  table_findAdjacentLocations(distanceThreshold = 1000) # 500 is the actual separation we use
+  table_findAdjacentLocations(distanceThreshold = 500) # 500 is the actual separation we use
 
 dim(adjacent_kl)
 
@@ -62,7 +62,7 @@ locationTbl <-
 
 adjacent_kl <-
   locationTbl %>%
-  table_findAdjacentLocations(distanceThreshold = 200) # 500 is the actual separation we use
+  table_findAdjacentLocations(distanceThreshold = 500) # 500 is the actual separation we use
 
 map <-
   adjacent_kl %>%
