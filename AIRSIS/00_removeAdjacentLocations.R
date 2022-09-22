@@ -13,8 +13,6 @@ collectionFile <- paste0(collectionName, ".rda")
 download.file(
   file.path("https://airfire-data-exports.s3.us-west-2.amazonaws.com/monitoring/v2/known-locations", collectionFile),
   destfile = file.path(".", collectionDir, collectionFile)
-  # file.path("http://data-monitoring_v2-c1.airfire.org/monitoring-v2/known-locations", collectionFile),
-  # destfile = file.path(".", collectionDir, collectionFile)
 )
 
 setLocationDataDir(file.path(".", collectionDir))
@@ -22,26 +20,21 @@ setLocationDataDir(file.path(".", collectionDir))
 locationTbl <- table_load(collectionName)
 dim(locationTbl)
 
-# ----- Review adjacent locations ----------------------------------------------
-
 adjacent_kl <-
   locationTbl %>%
   table_findAdjacentLocations(distanceThreshold = 500) # 500 is the actual separation we use
 
 dim(adjacent_kl)
 
-# If nrow(adjacent_kl) > 0, review the map
+# ----- Review adjacent locations ----------------------------------------------
 
 if ( nrow(adjacent_kl) > 0 ) {
 
-  map <-
-    adjacent_kl %>%
+  adjacent_kl %>%
     MazamaLocationUtils::table_leaflet(
       extraVars = c("locationName", "fullAQSID"),
       jitter = 0
     )
-
-  print(map)
 
 }
 
@@ -50,8 +43,8 @@ if ( nrow(adjacent_kl) > 0 ) {
 # On 2022-09-21
 #
 badIDs <- c(
-  # NM
-  "e585f31d04474c99"
+  # AZ
+  "897353ba80b9e477"
 )
 
 locationTbl <-
