@@ -2,11 +2,13 @@
 
 library(MazamaLocationUtils)
 
+collectionDir <- "AIRSIS"
 collectionName <- "airsis_PM2.5_sites_1000"
+collectionFile <- paste0(collectionName, ".rda")
 
 # ----- Load and Review --------------------------------------------------------
 
-setLocationDataDir("./AIRSIS")
+setLocationDataDir(file.path(".", collectionDir))
 
 locationTbl <-
   table_load(collectionName) %>%
