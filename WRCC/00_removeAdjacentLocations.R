@@ -13,8 +13,6 @@ collectionFile <- paste0(collectionName, ".rda")
 download.file(
   file.path("https://airfire-data-exports.s3.us-west-2.amazonaws.com/monitoring/v2/known-locations", collectionFile),
   destfile = file.path(".", collectionDir, collectionFile)
-  # file.path("http://data-monitoring_v2-c1.airfire.org/monitoring-v2/known-locations", collectionFile),
-  # destfile = file.path(".", collectionDir, collectionFile)
 )
 
 setLocationDataDir(file.path(".", collectionDir))
@@ -34,24 +32,21 @@ dim(adjacent_kl)
 
 if ( nrow(adjacent_kl) > 0 ) {
 
-  map <-
-    adjacent_kl %>%
+  adjacent_kl %>%
     MazamaLocationUtils::table_leaflet(
       extraVars = c("locationName", "fullAQSID"),
       jitter = 0
     )
 
-  print(map)
-
 }
 
 # ----- Locations to drop ------------------------------------------------------
 
-# On 2022-09-21
+# On 2022-09-22
 #
 badIDs <- c(
-  # OR
-  "03331ebcd95f5711"
+  # WY
+  "6e40c0f041589034"
 )
 
 locationTbl <-
