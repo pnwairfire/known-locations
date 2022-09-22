@@ -64,15 +64,20 @@ adjacent_kl <-
   locationTbl %>%
   table_findAdjacentLocations(distanceThreshold = 500) # 500 is the actual separation we use
 
-map <-
-  adjacent_kl %>%
-  MazamaLocationUtils::table_leaflet(
-    extraVars = c("locationName", "fullAQSID"),
-    jitter = 0
-  )
+nrow(adjacent_kl)
 
-print(map)
+if ( nrow(adjacent_kl) > 0 ) {
 
+  map <-
+    adjacent_kl %>%
+    MazamaLocationUtils::table_leaflet(
+      extraVars = c("locationName", "fullAQSID"),
+      jitter = 0
+    )
+
+  print(map)
+
+}
 
 # ----- Save the table ---------------------------------------------------------
 

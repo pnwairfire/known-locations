@@ -68,6 +68,39 @@ missingAddressTbl <- table_addOpenCageInfo(
   verbose = FALSE
 )
 
+# OR, if the above fails:
+
+if ( FALSE ) {
+
+  recordList <- list()
+
+  for ( i in seq_len(nrow(missingAddressTbl)) ) {
+
+    if ( i %% 10 == 0 )
+      message(sprintf("Working on %d of %d...", i, nrow(missingAddressTbl)))
+
+    singleRecord <- dplyr::slice(missingAddressTbl, i)
+
+    result <- try({
+      recordList[[i]] <- table_addOpenCageInfo(
+        singleRecord,
+        replaceExisting = TRUE,
+        retainOpenCage = FALSE,
+        verbose = FALSE
+      )
+    }, silent = TRUE)
+
+    if ( "try-error" %in% class(result) ) {
+      warn(sprintf("Failed to get openCage info for record #%d", i))
+      recordList[[i]] <- singleRecord
+    }
+
+  }
+
+  missingAddressTbl <- dplyr::bind_rows(recordList)
+
+}
+
 # Review
 missingAddressTbl %>%
   table_leaflet(
