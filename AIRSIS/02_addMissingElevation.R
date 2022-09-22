@@ -8,7 +8,10 @@ collectionName <- "airsis_PM2.5_sites_1000"
 
 setLocationDataDir("./AIRSIS")
 
-locationTbl <- table_load(collectionName)
+locationTbl <-
+  table_load(collectionName) %>%
+  # Saw a record with all missing values once
+  dplyr::filter(!is.na(.data$longitude) & !is.na(.data$latitude))
 
 missingElevation_mask <- is.na(locationTbl$elevation)
 

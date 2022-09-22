@@ -17,7 +17,11 @@ download.file(
 
 setLocationDataDir(file.path(".", collectionDir))
 
-locationTbl <- table_load(collectionName)
+locationTbl <-
+  table_load(collectionName) %>%
+  # Saw a record with all missing values once
+  dplyr::filter(!is.na(.data$longitude) & !is.na(.data$latitude))
+
 dim(locationTbl)
 
 # ----- Review duplicate locationIDs -------------------------------------------
@@ -55,6 +59,13 @@ if ( nrow(missingAddressTbl) > 0 ) {
       jitter = 0
     )
 
+}
+
+if ( FALSE ) {
+  # Drop location in Kazakhstan
+  missingAddressTbl <-
+    missingAddressTbl %>%
+    MazamaLocationUtils::table_removeRecord(locationID = "d0a8b33f8c6bf69d")
 }
 
 # ----- Add OpenCage info ------------------------------------------------------
