@@ -24,7 +24,11 @@ locationTbl <-
 
 dim(locationTbl)
 
+# NOTE:  START HERE AFTER RUNNING 00_removeAdjacentLocations
+#
 # ----- Review duplicate locationIDs -------------------------------------------
+
+rm(adjacent_kl)
 
 # Sanity check: both of these should be FALSE
 any(is.na(locationTbl$locationID))

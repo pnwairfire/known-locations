@@ -13,8 +13,6 @@ collectionFile <- paste0(collectionName, ".rda")
 download.file(
   file.path("https://airfire-data-exports.s3.us-west-2.amazonaws.com/monitoring/v2/known-locations", collectionFile),
   destfile = file.path(".", collectionDir, collectionFile)
-  # file.path("http://data-monitoring_v2-c1.airfire.org/monitoring-v2/known-locations", collectionFile),
-  # destfile = file.path(".", collectionDir, collectionFile)
 )
 
 setLocationDataDir(file.path(".", collectionDir))

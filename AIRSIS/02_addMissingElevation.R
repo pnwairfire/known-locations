@@ -1,3 +1,5 @@
+# NOTE:  START HERE AFTER RUNNING 01_addOpenCageInfo.R
+
 # Use a web service to add missing elevation data AFTER updating with OpenCage
 
 library(MazamaLocationUtils)
@@ -16,6 +18,8 @@ locationTbl <-
   dplyr::filter(!is.na(.data$longitude) & !is.na(.data$latitude))
 
 missingElevation_mask <- is.na(locationTbl$elevation)
+
+sum(missingElevation_mask)
 
 if ( sum(missingElevation_mask) > 0 ) {
 

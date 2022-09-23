@@ -10,7 +10,11 @@ setLocationDataDir("./WRCC")
 
 locationTbl <- table_load(collectionName)
 
+# NOTE:  START HERE AFTER RUNNING 01_addOpenCageInfo.R
+
 missingElevation_mask <- is.na(locationTbl$elevation)
+
+sum(missingElevation_mask)
 
 if ( sum(missingElevation_mask) > 0 ) {
 

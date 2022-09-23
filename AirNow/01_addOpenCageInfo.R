@@ -13,8 +13,6 @@ collectionFile <- paste0(collectionName, ".rda")
 download.file(
   file.path("https://airfire-data-exports.s3.us-west-2.amazonaws.com/monitoring/v2/known-locations", collectionFile),
   destfile = file.path(".", collectionDir, collectionFile)
-  # file.path("http://data-monitoring_v2-c1.airfire.org/monitoring-v2/known-locations", collectionFile),
-  # destfile = file.path(".", collectionDir, collectionFile)
 )
 
 setLocationDataDir(file.path(".", collectionDir))
@@ -22,7 +20,11 @@ setLocationDataDir(file.path(".", collectionDir))
 locationTbl <- table_load(collectionName)
 dim(locationTbl)
 
+# NOTE:  START HERE AFTER RUNNING 00_removeAdjacentLocations
+#
 # ----- Review duplicate locationIDs -------------------------------------------
+
+rm(adjacent_kl)
 
 # NOTE:  We support duplicate locationIDs for AirNow because it is possible for
 
