@@ -19,18 +19,94 @@ setLocationDataDir(file.path(".", collectionDir))
 
 locationTbl <- table_load(collectionName)
 
+# # ----- Names to update --------------------------------------------------------
+#
+# locationTbl %>%
+#   MazamaLocationUtils::table_leaflet(
+#     extraVars = c("locationName", "fullAQSID"),
+#     jitter = 0
+#   )
+#
+# # NOTE:  Could also use MazamaLocationUtils::table_updateSingleRecord()
+#
+# locationIDs <- c("aa1a1b7e023a61ad")
+# locationTbl[locationTbl$locationID %in% locationIDs, "locationName"] <- "Rocky Mtn Fire Cache"
+#
+# # Review
+# locationTbl %>% MazamaLocationUtils::table_leaflet(extraVars = "locationName")
+
 # ----- Names to update --------------------------------------------------------
 
-locationTbl %>%
-  MazamaLocationUtils::table_leaflet(
-    extraVars = c("locationName", "fullAQSID"),
-    jitter = 0
-  )
+uniqueOnlyTbl <-
+  locationTbl %>%
+  dplyr::select(locationID, fullAQSID)
 
-# NOTE:  Could also use MazamaLocationUtils::table_updateSingleRecord()
+hasNameTbl <-
+  locationTbl %>%
+  dplyr::filter(!is.na(locationName))
 
-locationIDs <- c("aa1a1b7e023a61ad")
-locationTbl[locationTbl$locationID %in% locationIDs, "locationName"] <- "Rocky Mtn Fire Cache"
+missingNameTbl <-
+  locationTbl %>%
+  dplyr::filter(is.na(locationName))
+
+dim(hasNameTbl)
+dim(missingNameTbl)
+
+# NOTE:  If there are no records with missing addresses, you can stop here.
+
+# Review
+if ( nrow(missingNameTbl) > 0 ) {
+
+  missingNameTbl %>%
+    table_leaflet(
+      extraVars = c("locationName", "fullAQSID", "address"),
+      jitter = 0
+    )
+
+}
+
+# Update locationTbl directly
+
+# 2022-10-17
+missingNameTbl <-
+  missingNameTbl %>%
+  table_updateSingleRecord(list(locationID = "02cd0512f806e0b3", locationName = "Lihue, Kauai")) %>%
+  table_updateSingleRecord(list(locationID = "587be29d277b5f50", locationName = "Kona - Kuakini Highway")) %>%
+  table_updateSingleRecord(list(locationID = "ac464d275d7d1665", locationName = "Naalehu")) %>%
+  table_updateSingleRecord(list(locationID = "5d3c0e71e00d36c0", locationName = "Pahoa")) %>%
+  table_updateSingleRecord(list(locationID = "987cbfc3201b0c1a", locationName = "Red Bluff")) %>%
+  table_updateSingleRecord(list(locationID = "5eb8f452a9146f31", locationName = "Aberdeen - Williams St.")) %>%
+  table_updateSingleRecord(list(locationID = "09af87e9725e6e1a", locationName = "Ft. Benning - Arbonne St.")) %>%
+  table_updateSingleRecord(list(locationID = "688cb0571eaed441", locationName = "Dallas - Bexar St.")) %>%
+  table_updateSingleRecord(list(locationID = "ac129bc88abef963", locationName = "Albuquerque - Alameda Rd.")) %>%
+  table_updateSingleRecord(list(locationID = "1ba704d9f448bd0a", locationName = "Albuquerque - Williams St.")) %>%
+  table_updateSingleRecord(list(locationID = "20964517ad55550f", locationName = "Delta Public Library")) %>%
+  table_updateSingleRecord(list(locationID = "5dbabe2bfe557b60", locationName = "Black Oak Lodge")) %>%
+  table_updateSingleRecord(list(locationID = "1c6cc4784b7d8dad", locationName = "Kokanee Rd.")) %>%
+  table_updateSingleRecord(list(locationID = "0d72360824473e2a", locationName = "Badger Pass Lodge")) %>%
+  table_updateSingleRecord(list(locationID = "c68d9c5b09aec1b7", locationName = "Antioch")) %>%
+  table_updateSingleRecord(list(locationID = "2fb60a7ada35647f", locationName = "Bothe Napa Valley Park")) %>%
+  table_updateSingleRecord(list(locationID = "018923aa466ba8bf", locationName = "Brooks")) %>%
+  table_updateSingleRecord(list(locationID = "a19fde350d055a8c", locationName = "Sacramento - 5th St.")) %>%
+  table_updateSingleRecord(list(locationID = "127e996697f9731c", locationName = "Sacramento - Solons Alley")) %>%
+  table_updateSingleRecord(list(locationID = "be63451fea552e9a", locationName = "Georgetown")) %>%
+  table_updateSingleRecord(list(locationID = "49fa6c3a7b263a3d", locationName = "S. Lake Tahoe - Oakland Ave.")) %>%
+  table_updateSingleRecord(list(locationID = "e532e726e974c2d4", locationName = "Elk Mtn. Rd.")) %>%
+  table_updateSingleRecord(list(locationID = "bdf67b1e536bcb2f", locationName = "Willows")) %>%
+  table_updateSingleRecord(list(locationID = "69239db34adfaa1f", locationName = "Happy Camp - Buckhorn Road"))
+
+# ----- Combine two halves -----------------------------------------------------
+
+updatedLocationTbl <-
+  dplyr::bind_rows(hasNameTbl, missingNameTbl)
+
+# Use original ordering
+locationTbl <-
+  uniqueOnlyTbl %>%
+  dplyr::left_join(updatedLocationTbl, by = c("locationID", "fullAQSID"))
+
+# Sanity check: should be TRUE
+identical(uniqueOnlyTbl$locationID, locationTbl$locationID)
 
 # Review
 locationTbl %>% MazamaLocationUtils::table_leaflet(extraVars = "locationName")
