@@ -24,7 +24,7 @@ dim(locationTbl)
 
 adjacent_kl <-
   locationTbl %>%
-  table_findAdjacentLocations(distanceThreshold = 500) # 500 is the actual separation we use
+  table_findAdjacentLocations(distanceThreshold = 250) # 500 is the actual separation we use
 
 dim(adjacent_kl)
 

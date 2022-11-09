@@ -20,47 +20,107 @@ setLocationDataDir(file.path(".", collectionDir))
 locationTbl <- table_load(collectionName)
 dim(locationTbl)
 
-# ----- Problem to fix ---------------------------------------------------------
+# ===== BY deviceDeploymentID ==================================================
 
-locationTbl %>%
-  MazamaLocationUtils::table_leaflet(
-    extraVars = c("locationName", "fullAQSID"),
-    jitter = 0
+if ( FALSE ) {
+
+  # Unit 1027 mis-identified as 1026
+  badIDs <- c("71bcdf39b6d635a4")
+
+  # Review bad locations
+  locationTbl %>%
+    dplyr::filter(locationID == badIDs) %>%
+    MazamaLocationUtils::table_leaflet(
+      extraVars = c("locationName", "fullAQSID"),
+      jitter = 0
+    )
+
+  locationTbl <-
+    locationTbl %>%
+    table_updateSingleRecord(
+      locationList = list(
+        locationID = "71bcdf39b6d635a4",
+        fullAQSID = "840MMFS11027",
+        locationName = "Kernville",
+        AQSID = "MMFS11027",
+        airnow_stationID = "MMFS11027"
+      )
+    )
+
+
+  # Review fixed locations
+  locationTbl %>%
+    dplyr::filter(locationID == badIDs) %>%
+    MazamaLocationUtils::table_leaflet(
+      extraVars = c("locationName", "fullAQSID"),
+      jitter = 0
+    )
+
+  # ----- Save the table -------------------------------------------------------
+
+  table_save(
+    locationTbl,
+    collectionName = collectionName,
+    backup = FALSE,
+    outputType = "csv"
   )
 
-# NOTE:  Could also use MazamaLocationUtils::table_updateSingleRecord()
+  table_save(
+    locationTbl,
+    collectionName = collectionName,
+    backup = FALSE,
+    outputType = "rda"
+  )
 
-locationIDs <- c("d9c1a2c884e60130")
-locationTbl[locationTbl$locationID %in% locationIDs, "locationName"] <- "Oakhurst"
+}
 
-locationIDs <- c("786ab2a4f8f46681")
-locationTbl[locationTbl$locationID %in% locationIDs, "locationName"] <- "Minaret Creek"
+# ===== BY fullAQSID ===========================================================
 
-locationIDs <- c("9fbd8adf8e6e80a4")
-locationTbl[locationTbl$locationID %in% locationIDs, "locationName"] <- "Mammoth Mountain"
+if ( FALSE ) {
 
-locationIDs <- c("16d71b0a47a77f39")
-locationTbl[locationTbl$locationID %in% locationIDs, "locationName"] <- "Devil's Postpile"
+  locationTbl %>%
+    MazamaLocationUtils::table_leaflet(
+      extraVars = c("locationName", "fullAQSID"),
+      jitter = 0
+    )
 
+  # NOTE:  Could also use MazamaLocationUtils::table_updateSingleRecord()
 
-# Review
-locationTbl %>% MazamaLocationUtils::table_leaflet(extraVars = "locationName")
-
-
-# ----- Save the table ---------------------------------------------------------
-
-table_save(
-  locationTbl,
-  collectionName = collectionName,
-  backup = FALSE,
-  outputType = "csv"
-)
-
-table_save(
-  locationTbl,
-  collectionName = collectionName,
-  backup = FALSE,
-  outputType = "rda"
-)
+  # locationIDs <- c("d9c1a2c884e60130")
+  # locationTbl[locationTbl$locationID %in% locationIDs, "locationName"] <- "Oakhurst"
+  #
+  # locationIDs <- c("786ab2a4f8f46681")
+  # locationTbl[locationTbl$locationID %in% locationIDs, "locationName"] <- "Minaret Creek"
+  #
+  # locationIDs <- c("9fbd8adf8e6e80a4")
+  # locationTbl[locationTbl$locationID %in% locationIDs, "locationName"] <- "Mammoth Mountain"
+  #
+  # locationIDs <- c("16d71b0a47a77f39")
+  # locationTbl[locationTbl$locationID %in% locationIDs, "locationName"] <- "Devil's Postpile"
 
 
+  # Review
+  locationTbl %>%
+    MazamaLocationUtils::table_leaflet(
+      extraVars = c("locationName", "fullAQSID"),
+      jitter = 0
+    )
+
+
+  # ----- Save the table ---------------------------------------------------------
+
+  table_save(
+    locationTbl,
+    collectionName = collectionName,
+    backup = FALSE,
+    outputType = "csv"
+  )
+
+  table_save(
+    locationTbl,
+    collectionName = collectionName,
+    backup = FALSE,
+    outputType = "rda"
+  )
+
+}

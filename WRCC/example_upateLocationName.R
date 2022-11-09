@@ -39,7 +39,11 @@ locationTbl[locationTbl$locationID %in% locationIDs, "locationName"] <- "Met One
 
 
 # Review
-locationTbl %>% MazamaLocationUtils::table_leaflet(extraVars = "locationName")
+locationTbl %>%
+  MazamaLocationUtils::table_leaflet(
+    extraVars = c("locationName", "fullAQSID"),
+    jitter = 0
+  )
 
 
 # ----- Save the table ---------------------------------------------------------
