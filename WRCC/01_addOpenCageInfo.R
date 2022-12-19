@@ -125,12 +125,12 @@ locationTbl <-
 # Sanity check: should be TRUE
 identical(uniqueOnlyTbl$locationID, locationTbl$locationID)
 
-# Review
-locationTbl %>%
-  MazamaLocationUtils::table_leaflet(
-    extraVars = c("fullAQSID", "elevation", "address"),
-    jitter = 0
-  )
+# # Review
+# locationTbl %>%
+#   MazamaLocationUtils::table_leaflet(
+#     extraVars = c("fullAQSID", "elevation", "address"),
+#     jitter = 0
+#   )
 
 # ----- Save the table ---------------------------------------------------------
 

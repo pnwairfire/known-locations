@@ -45,8 +45,13 @@ if ( nrow(adjacent_kl) > 0 ) {
 # On 2022-09-22
 #
 badIDs <- c(
-  # WY
-  "6e40c0f041589034"
+  # Mongolia and China (longitudes W?)
+  "9304f07e2f12afde",
+  "d98a65c17e22355f",
+  "57a64a5afb5e47eb",
+  "7390819102f42221",
+  "cba8774652e52d4b",
+  "4eba35453e7394b1"
 )
 
 locationTbl <-
@@ -57,9 +62,11 @@ locationTbl <-
 
 adjacent_kl <-
   locationTbl %>%
-  table_findAdjacentLocations(distanceThreshold = 500) # 500 is the actual separation we use
+  table_findAdjacentLocations(distanceThreshold = 200) # 500 is the actual separation we use
 
 nrow(adjacent_kl)
+
+# NOTE:  Allow two locations in Entiat on either side of 97
 
 if ( nrow(adjacent_kl) > 0 ) {
 
