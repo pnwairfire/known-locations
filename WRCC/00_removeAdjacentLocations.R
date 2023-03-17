@@ -28,7 +28,7 @@ adjacent_kl <-
 
 dim(adjacent_kl)
 
-# If nrow(adjacent_kl) > 0, review the map
+# ----- Review adjacent locations ----------------------------------------------
 
 if ( nrow(adjacent_kl) > 0 ) {
 
@@ -37,6 +37,10 @@ if ( nrow(adjacent_kl) > 0 ) {
       extraVars = c("locationName", "fullAQSID"),
       jitter = 0
     )
+
+} else {
+
+  message("No adjacent locations. Proceed to step 01_addOpenCageInfo")
 
 }
 

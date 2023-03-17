@@ -19,6 +19,27 @@ setLocationDataDir(file.path(".", collectionDir))
 
 locationTbl <- table_load(collectionName)
 
+# ===== SINGLE RECORD NEEDS UPDATING ===========================================
+
+if ( FALSE ) {
+
+  # 280590006 Needs to change from Temporary to Permanent
+
+  locationID <-
+    locationTbl %>%
+    dplyr::filter(AQSID == "280590006") %>%
+    dplyr::pull("locationID")
+
+  locationTbl <- table_updateSingleRecord(
+    locationTbl,
+    locationList = list(
+      locationID = locationID,
+      airnow_monitorType = "Permanent"
+    )
+  )
+
+}
+
 # ===== NAMES THAT NEED UPDATING ===============================================
 
 if ( FALSE ) {

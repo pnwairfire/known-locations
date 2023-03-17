@@ -26,21 +26,21 @@ adjacent_kl <-
   locationTbl %>%
   table_findAdjacentLocations(distanceThreshold = 100) # 500 is the actual separation we use
 
-dim(adjacent_kl)
+dim(adjacent_kl) # NOTE:  Two monitors in Calgary are < 200m apart
 
-# NOTE:  Two monitors in Calgary are < 200m apart
-# If nrow(adjacent_kl) > 0, review the map
+# ----- Review adjacent locations ----------------------------------------------
 
 if ( nrow(adjacent_kl) > 0 ) {
 
-  map <-
-    adjacent_kl %>%
+  adjacent_kl %>%
     MazamaLocationUtils::table_leaflet(
       extraVars = c("locationName", "fullAQSID"),
       jitter = 0
     )
 
-  print(map)
+} else {
+
+  message("No adjacent locations. Proceed to step 01_addOpenCageInfo")
 
 }
 

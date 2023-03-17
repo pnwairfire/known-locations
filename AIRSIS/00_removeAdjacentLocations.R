@@ -20,6 +20,8 @@ setLocationDataDir(file.path(".", collectionDir))
 locationTbl <- table_load(collectionName)
 dim(locationTbl)
 
+# ----- Review adjacent locations ----------------------------------------------
+
 adjacent_kl <-
   locationTbl %>%
   table_findAdjacentLocations(distanceThreshold = 500) # 500 is the actual separation we use
@@ -35,6 +37,10 @@ if ( nrow(adjacent_kl) > 0 ) {
       extraVars = c("locationName", "fullAQSID"),
       jitter = 0
     )
+
+} else {
+
+  message("No adjacent locations. Proceed to step 01_addOpenCageInfo")
 
 }
 

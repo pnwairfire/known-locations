@@ -87,6 +87,7 @@ if ( nrow(missingAddressTbl) > 0 ) {
 
 # ----- Add OpenCage info ------------------------------------------------------
 
+source("global_vars.R")
 Sys.setenv("OPENCAGE_KEY" = OPENCAGE_API_KEY)
 
 missingAddressTbl <- table_addOpenCageInfo(
