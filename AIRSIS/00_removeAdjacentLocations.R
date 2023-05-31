@@ -46,11 +46,11 @@ if ( nrow(adjacent_kl) > 0 ) {
 
 # ----- Locations to drop ------------------------------------------------------
 
-# On 2022-09-21
+# On 2023-05-31
 #
 badIDs <- c(
-  # AZ
-  "897353ba80b9e477"
+  # NM
+  "cc1a7689bbf6b688"
 )
 
 locationTbl <-
