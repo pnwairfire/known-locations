@@ -24,33 +24,39 @@ dim(locationTbl)
 
 if ( FALSE ) {
 
-  # Unit 1027 mis-identified as 1026
-  badIDs <- c("71bcdf39b6d635a4")
+  # Unit 1077 mis-identified as 1070
+  badID <- "277ce1415feb3537"
 
   # Review bad locations
   locationTbl %>%
-    dplyr::filter(locationID == badIDs) %>%
+    dplyr::filter(locationID == badID) %>%
     MazamaLocationUtils::table_leaflet(
       extraVars = c("locationName", "fullAQSID"),
       jitter = 0
     )
 
+  locationTbl %>%
+    dplyr::filter(locationID == badID) %>%
+    dplyr::glimpse()
+
   locationTbl <-
     locationTbl %>%
     table_updateSingleRecord(
       locationList = list(
-        locationID = "71bcdf39b6d635a4",
-        fullAQSID = "840MMFS11027",
-        locationName = "Kernville",
-        AQSID = "MMFS11027",
-        airnow_stationID = "MMFS11027"
+        locationID = badID,
+        fullAQSID = as.character(NA),
+        AQSID = as.character(NA),
+        locationName = "USFS 1077",
+        airnow_stationID = as.character(NA),
+        airnow_siteCode = as.character(NA),
+        airnow_status = as.character(NA)
       )
     )
 
 
   # Review fixed locations
   locationTbl %>%
-    dplyr::filter(locationID == badIDs) %>%
+    dplyr::filter(locationID == badID) %>%
     MazamaLocationUtils::table_leaflet(
       extraVars = c("locationName", "fullAQSID"),
       jitter = 0
