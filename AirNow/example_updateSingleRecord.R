@@ -19,24 +19,49 @@ setLocationDataDir(file.path(".", collectionDir))
 
 locationTbl <- table_load(collectionName)
 
+table_leaflet(locationTbl)
+
 # ===== SINGLE RECORD NEEDS UPDATING ===========================================
 
 if ( FALSE ) {
 
-  # 280590006 Needs to change from Temporary to Permanent
+  # # 280590006 Needs to change from Temporary to Permanent
+  #
+  # locationID <-
+  #   locationTbl %>%
+  #   dplyr::filter(AQSID == "280590006") %>%
+  #   dplyr::pull("locationID")
+  #
+  # locationTbl <- table_updateSingleRecord(
+  #   locationTbl,
+  #   locationList = list(
+  #     locationID = locationID,
+  #     airnow_monitorType = "Permanent"
+  #   )
+  # )
 
-  locationID <-
-    locationTbl %>%
-    dplyr::filter(AQSID == "280590006") %>%
-    dplyr::pull("locationID")
+  # location "  locationID <- "277ce1415feb3537" has old AirNow info
+  locationID <- "277ce1415feb3537"
 
-  locationTbl <- table_updateSingleRecord(
-    locationTbl,
-    locationList = list(
-      locationID = locationID,
-      airnow_monitorType = "Permanent"
+  locationTbl[locationTbl$locationID == "277ce1415feb3537", "locationName"] <- "USFS 1077"
+  locationTbl[locationTbl$locationID == "277ce1415feb3537", "AQSID"] <- ""
+  locationTbl[locationTbl$locationID == "277ce1415feb3537", "fullAQSID"] <- ""
+  locationTbl[locationTbl$locationID == "277ce1415feb3537", "airnow_stationID"] <- ""
+  locationTbl[locationTbl$locationID == "277ce1415feb3537", "airnow_siteCode"] <- ""
+  locationTbl[locationTbl$locationID == "277ce1415feb3537", "airnow_monitorType"] <- "Temporary"
+  locationTbl[locationTbl$locationID == "277ce1415feb3537", "airnow_status"] <- ""
+
+  # Review fixed locations
+  locationTbl %>%
+    dplyr::filter(locationID == !!locationID) %>%
+    MazamaLocationUtils::table_leaflet(
+      extraVars = c("locationName", "fullAQSID"),
+      jitter = 0
     )
-  )
+
+  locationTbl %>%
+    dplyr::filter(locationID == !!locationID) %>%
+    dplyr::glimpse()
 
 }
 
@@ -44,18 +69,17 @@ if ( FALSE ) {
 
 if ( FALSE ) {
 
-  badNameIDs <- c("840MMCA82019", "840MMAIR1021")
+  badLocationIDs <- c("277ce1415feb3537")
 
   # Review bad locations
   locationTbl %>%
-    dplyr::filter(fullAQSID == badNameIDs) %>%
+    dplyr::filter(locationID %in% !!badLocationIDs) %>%
     MazamaLocationUtils::table_leaflet(
       extraVars = c("locationName", "fullAQSID"),
       jitter = 0
     )
 
-  locationTbl[locationTbl$fullAQSID == "840MMCA82019", "locationName"] <- "MMCA82019"
-  locationTbl[locationTbl$fullAQSID == "840MMAIR1021", "locationName"] <- "SEKI1002 EBAM5"
+  locationTbl[locationTbl$locationID == "277ce1415feb3537", "locationName"] <- "USFS 1077"
 
   # Review fixed locations
   locationTbl %>%
