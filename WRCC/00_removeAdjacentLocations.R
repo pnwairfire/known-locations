@@ -46,16 +46,10 @@ if ( nrow(adjacent_kl) > 0 ) {
 
 # ----- Locations to drop ------------------------------------------------------
 
-# On 2022-09-22
 #
 badIDs <- c(
-  # Mongolia and China (longitudes W?)
-  "9304f07e2f12afde",
-  "d98a65c17e22355f",
-  "57a64a5afb5e47eb",
-  "7390819102f42221",
-  "cba8774652e52d4b",
-  "4eba35453e7394b1"
+  #
+  "0419d1af8e7aa9e9"
 )
 
 locationTbl <-
