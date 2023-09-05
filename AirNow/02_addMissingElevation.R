@@ -10,6 +10,7 @@ setLocationDataDir("./AirNow")
 
 locationTbl <- table_load(collectionName)
 
+# ==============================================================================
 # NOTE:  START HERE AFTER RUNNING 01_addOpenCageInfo.R
 
 missingElevation_mask <- is.na(locationTbl$elevation)
