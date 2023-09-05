@@ -17,6 +17,7 @@ locationTbl <-
   # Saw a record with all missing values once
   dplyr::filter(!is.na(.data$longitude) & !is.na(.data$latitude))
 
+# ==============================================================================
 # NOTE:  START HERE AFTER RUNNING 01_addOpenCageInfo.R
 
 missingElevation_mask <- is.na(locationTbl$elevation)
