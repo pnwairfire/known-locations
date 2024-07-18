@@ -49,27 +49,18 @@ if ( nrow(adjacent_kl) > 0 ) {
 # On 2024-07-11
 #
 badIDs <- c(
-  # Canada
-  "d9b7c49d81252e45",
   # WA
-  "cd32c50d23e420de", "e9679b74fac7ed17", "17eacd84ae159d27",
+  "c2d86pg",
   # ID
-  "76ad362e5cecbb59",
-  # WY
-  "b8c19e231575557f",
+  "c2m2748",
   # FL
-  "beb421676bf0e259",
-  # IN
-  "930dc39fcbef74ae", "d077f55fc2aa1520", "75ba3eaff7a6a4f3", "32bf022211283be6",
-  # CO
-  "ae18f23c92c781a5",
+  "djmgqqh",
   # NM
-  "9tuver0", "9tuver1", "9tuver2",
+  "9tuver0",
   # HI
   "3456b204b12ffadd",
   # CA
-  "26ffe6f6fc94422d", "2b1eba90a08e5659", "c06f3b511ec4ef5c", "ceeac675fd056a51",
-  "564d460e1c3ec388", "121fad25495a747a", "2275481147c5c093"
+  "9qce75b", "9r2434r", "9r24uz5", "fc8ce3aaab826f72"
 )
 
 locationTbl <-
