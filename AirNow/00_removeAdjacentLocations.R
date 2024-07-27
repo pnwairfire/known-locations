@@ -50,7 +50,7 @@ if ( nrow(adjacent_kl) > 0 ) {
 #
 badIDs <- c(
   # OR
-  "9r8qrkwmzf"
+  "9r9jswyu2q"
 )
 
 locationTbl <-
