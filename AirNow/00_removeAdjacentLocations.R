@@ -49,8 +49,8 @@ if ( nrow(adjacent_kl) > 0 ) {
 # On 2024-07-11
 #
 badIDs <- c(
-  # WA
-  "c2d86pu"
+  # OR
+  "9r8qrkwmzf"
 )
 
 locationTbl <-
