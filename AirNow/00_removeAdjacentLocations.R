@@ -20,7 +20,7 @@ setLocationDataDir(file.path(".", collectionDir))
 locationTbl <- table_load(collectionName)
 dim(locationTbl)
 
-# ----- Review adjacent locations ----------------------------------------------
+# ----- Find adjacent locations ------------------------------------------------
 
 adjacent_kl <-
   locationTbl %>%
@@ -49,8 +49,20 @@ if ( nrow(adjacent_kl) > 0 ) {
 # On 2024-07-11
 #
 badIDs <- c(
-  # OR
-  "9r9jswyu2q"
+  # ID
+  "c2m274b",
+  # FL
+  "djmgqq5",
+  # NM
+  "9tfg89w",
+  # CA
+  "51371acbacd2b0ed",
+  "6b06028001ac0f6f",
+  "9r0qtq3",
+  "9r2434q",
+  "9r24uz5",
+  "9r24uz6",
+  "5742a6bbfc5d0683"
 )
 
 locationTbl <-
